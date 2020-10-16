@@ -29,6 +29,17 @@ public class ClienteControllerJPA {
 		return repository.save(c);
 	}
 
+	@DeleteMapping("/{id}")
+	public void dropCliente(@PathVariable Integer id) { 
+		repository.deleteById(id);
+	}
+	
+	@PutMapping("/{id}")
+	public void updateCliente(@RequestBody Cliente c, @PathVariable Integer id) { 
+		repository.deleteById(id);
+		repository.save(c);
+	}
+	
 	@GetMapping("/BySurname/{surname}")
 	public Iterable<Cliente> getClientesBySurname(@PathVariable String surname) { 
 		return repository.findAllBySurname(surname);

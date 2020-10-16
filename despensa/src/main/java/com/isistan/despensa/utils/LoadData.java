@@ -20,9 +20,9 @@ public class LoadData {
 	@Bean
 	CommandLineRunner initDataBase(@Qualifier("clienteRepository") ClienteRepository repository) {
 		List<Cliente> datos = new ArrayList<Cliente> ();
-		datos.add(new Cliente(1111, "Belen", "Enemark", 1111));
-		datos.add(new Cliente(1234, "Juan", "Deccechis", 1234));
-		datos.add(new Cliente(9999, "Mateo", "Zarrabeitia", 9999));
+		datos.add(new Cliente(1111, "Enemark", "Belen", 1111));
+		datos.add(new Cliente(1234, "Deccechis", "Juan", 1234));
+		datos.add(new Cliente(9999, "Zarrabeitia", "Mateo", 9999));
 		repository.saveAll(datos);
 		return null;
 	}
