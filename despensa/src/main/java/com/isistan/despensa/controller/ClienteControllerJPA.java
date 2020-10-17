@@ -20,27 +20,32 @@ public class ClienteControllerJPA {
 	}
 	
 	@GetMapping("/")
+	@CrossOrigin
 	public Iterable<Cliente> getPersons() { 
 		return repository.findAll();
 	}
 	
 	@PostMapping("/")
+	@CrossOrigin
 	public Cliente newCliente(@RequestBody Cliente c) { 
 		return repository.save(c);
 	}
 
 	@DeleteMapping("/{id}")
+	@CrossOrigin
 	public void dropCliente(@PathVariable Integer id) { 
 		repository.deleteById(id);
 	}
 	
 	@PutMapping("/{id}")
+	@CrossOrigin
 	public void updateCliente(@RequestBody Cliente c, @PathVariable Integer id) { 
 		repository.deleteById(id);
 		repository.save(c);
 	}
 	
 	@GetMapping("/BySurname/{surname}")
+	@CrossOrigin
 	public Iterable<Cliente> getClientesBySurname(@PathVariable String surname) { 
 		return repository.findAllBySurname(surname);
 	}
