@@ -19,7 +19,7 @@ public class ClienteControllerJPA {
 		this.repository = null;
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/") 
 	@CrossOrigin
 	public Iterable<Cliente> getPersons() { 
 		return repository.findAll();
