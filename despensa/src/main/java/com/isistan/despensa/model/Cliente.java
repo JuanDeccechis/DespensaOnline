@@ -21,16 +21,13 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 @Entity
-public class Cliente implements Serializable {
+@Data
+public class Cliente {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(
-			strategy= GenerationType.AUTO,
+			strategy= GenerationType.IDENTITY,
 			generator="native"
 			)
 	@GenericGenerator(
@@ -48,8 +45,9 @@ public class Cliente implements Serializable {
 	@Column
 	private Integer dni;
 
-	@OneToMany(mappedBy="cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="cliente")
 //	@JsonManagedReference
+//	@OneToMany
 	@JsonIgnore
 	private List<Factura> facturas;
 	
@@ -110,9 +108,6 @@ public class Cliente implements Serializable {
 		this.facturas = facturas;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	@Override
 	public boolean equals(Object obj) {

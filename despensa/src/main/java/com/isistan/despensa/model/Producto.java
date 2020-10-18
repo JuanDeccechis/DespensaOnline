@@ -1,22 +1,30 @@
 package com.isistan.despensa.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
 @Entity
 @Data
-public class Producto {
-	
+public class Producto{
+
+
 	@Id
 	@GeneratedValue(
-			strategy= GenerationType.AUTO,
+			strategy= GenerationType.IDENTITY,
 			generator="native"
 			)
 	@GenericGenerator(
@@ -38,6 +46,10 @@ public class Producto {
 	@Column
 	private Double precio;
 	
+	@ManyToMany
+	@JsonIgnore
+	private List<Factura> facturas;
+	
 	public Producto(Integer id, String nombre, String descripcion, Integer cantidad, Double precio) {
 		super();
 		this.id = id;
@@ -58,6 +70,8 @@ public class Producto {
 	public Producto() {
 		super();
 	}	
+	
+	
 	
 
 

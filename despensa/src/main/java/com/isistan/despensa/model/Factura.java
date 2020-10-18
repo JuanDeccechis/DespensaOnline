@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,7 +20,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Factura implements Serializable{
 
 	/**
@@ -34,11 +38,10 @@ public class Factura implements Serializable{
 	@Column
 	private Date fecha;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="cliente_nombre")
+	@ManyToOne
 	private Cliente cliente;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	private List<Producto> productos;
 
 	public Factura(Integer id, Date fecha, Cliente cliente, List<Producto> productos) {

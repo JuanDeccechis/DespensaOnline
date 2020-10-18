@@ -25,9 +25,9 @@ public class LoadData {
 	@Bean
 	CommandLineRunner initDataBaseCliente(@Qualifier("clienteRepository") ClienteRepository repository) {
 		List<Cliente> datos = new ArrayList<Cliente> ();
-		datos.add(new Cliente("Enemark", "Belen", 1111));
-		datos.add(new Cliente("Deccechis", "Juan", 1234));
-		datos.add(new Cliente("Zarrabeitia", "Mateo", 9999));
+		datos.add(new Cliente(1,"Enemark", "Belen", 1111));
+		datos.add(new Cliente(2,"Deccechis", "Juan", 1234));
+		datos.add(new Cliente(3,"Zarrabeitia", "Mateo", 9999));
 		repository.saveAll(datos);
 		return null;
 	}
@@ -36,10 +36,10 @@ public class LoadData {
 	@Bean
 	CommandLineRunner initDataBaseProducto(@Qualifier("productoRepository") ProductoRepository repository) {
 		List<Producto> datos = new ArrayList<Producto> ();
-		datos.add(new Producto("Lavandina","Lorem lorem", 10, 150.00));
-		datos.add(new Producto("Tallarines","Lorem lorem", 10, 100.00));
-		datos.add(new Producto("Detergente","Lorem lorem", 10, 115.00));
-		datos.add(new Producto("Coca Cola","Lorem lorem", 10, 150.00));
+		datos.add(new Producto(1,"Lavandina","Lorem lorem", 10, 150.00));
+		datos.add(new Producto(2,"Tallarines","Lorem lorem", 10, 100.00));
+		datos.add(new Producto(3,"Detergente","Lorem lorem", 10, 115.00));
+		datos.add(new Producto(4,"Coca Cola","Lorem lorem", 10, 150.00));
 		repository.saveAll(datos);
 		return null;
 	}
@@ -48,10 +48,10 @@ public class LoadData {
 	CommandLineRunner initDataBaseFactura(@Qualifier("facturaRepository") FacturaRepository repository) {
 		List<Producto> productos = new ArrayList<Producto> ();
 		List<Factura> facturas = new ArrayList<Factura> ();
-		productos.add(new Producto("Lavandina","Lorem lorem", 10, 150.00));
-		productos.add(new Producto("Tallarines","Lorem lorem", 10, 100.00));
-		productos.add(new Producto("Detergente","Lorem lorem", 10, 115.00));
-		facturas.add(new Factura(new Cliente("Enemark", "Belen", 1111),productos, new Date(System.currentTimeMillis())));
+		productos.add(new Producto(1,"Lavandina","Lorem lorem", 10, 150.00));
+		productos.add(new Producto(2,"Tallarines","Lorem lorem", 10, 100.00));
+		productos.add(new Producto(3,"Detergente","Lorem lorem", 10, 115.00));
+		facturas.add(new Factura(new Cliente(1,"Enemark", "Belen", 1111),productos, new Date(System.currentTimeMillis())));
 		repository.saveAll(facturas);
 		return null;
 	}
