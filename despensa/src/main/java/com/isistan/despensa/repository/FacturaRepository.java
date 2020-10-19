@@ -2,14 +2,13 @@ package com.isistan.despensa.repository;
 
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.isistan.despensa.dto.DTOFacturaClienteReporte;
+import com.isistan.despensa.dto.DTOProductoMasVendido;
 import com.isistan.despensa.dto.DTOReporteVentasDia;
 import com.isistan.despensa.model.Factura;
 
@@ -44,6 +43,14 @@ public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 			+ "GROUP by f.fecha", 
 			nativeQuery = true)
 	Iterable<DTOReporteVentasDia> getReporteVentasPorDia();
+	
+	@Query( value = "SELECT p.*, COUNT(fp.productos_id) as cantidad FROM factura_productos fp\r\n"
+			+ "join producto p on p.id = fp.productos_id\r\n"
+			+ "GROUP by fp.productos_id\r\n"
+			+ "ORDER by cantidad DESC\r\n"
+			+ "LIMIT 1", 
+			nativeQuery = true)
+	Iterable<DTOProductoMasVendido> getProductoMasVendido();
 
 
 	
