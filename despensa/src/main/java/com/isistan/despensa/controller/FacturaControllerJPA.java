@@ -1,5 +1,10 @@
 package com.isistan.despensa.controller;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,8 +42,15 @@ public class FacturaControllerJPA {
 
 	@PostMapping("/")
 	@CrossOrigin
-	public Factura newFactura(@RequestBody Factura f) { 
-		return repository.save(f);
+	public Factura newFactura(@RequestBody Factura f) {
+		Integer cantCompras = repository.getComprasDiaPorUsuario(f.getCliente().getId(), f.getFecha());
+		if(cantCompras == null) {
+			return repository.save(f);
+		} else if(cantCompras < 3 && cantCompras+f.getProductos().size() <=3) {
+			System.out.println(cantCompras+f.getProductos().size());
+			return repository.save(f);
+		}
+		return null;
 	}
 
 	@DeleteMapping("/{id}")
