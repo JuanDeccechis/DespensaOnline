@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.isistan.despensa.dto.DTOFacturaClienteReporte;
+import com.isistan.despensa.dto.DTOReporteVentasDia;
 import com.isistan.despensa.model.Factura;
 
 @Repository
@@ -35,6 +36,14 @@ public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 			+ "	GROUP BY fp.factura_id, f.cliente_id", 
 			nativeQuery = true)
 	Iterable<DTOFacturaClienteReporte> getReporteCliente();
+	
+	@Query( value = "select f.fecha, sum(p.precio) as total from cliente c\r\n"
+			+ "join factura f ON f.cliente_id = c.id\r\n"
+			+ "join factura_productos fp ON f.id = fp.factura_id\r\n"
+			+ "join producto p ON p.id = fp.productos_id\r\n"
+			+ "GROUP by f.fecha", 
+			nativeQuery = true)
+	Iterable<DTOReporteVentasDia> getReporteVentasPorDia();
 
 
 	
