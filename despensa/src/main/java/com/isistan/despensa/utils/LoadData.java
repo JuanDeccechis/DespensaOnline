@@ -31,7 +31,7 @@ public class LoadData {
 		Faker faker = new Faker(new Locale("es"));
 		List<Cliente> datos = new ArrayList<Cliente> ();
 		for (int i = 1; i <= CANTMAXCLIENTES; i++) {
-			datos.add(new Cliente(i, faker.name().lastName(), faker.name().firstName(), faker.number().numberBetween(1000, 9999)));
+			datos.add(new Cliente(i, faker.name().lastName(), faker.name().firstName(), Integer.parseInt(faker.phoneNumber().subscriberNumber(8))));
 		}
 //		datos.add(new Cliente(1,"Enemark", "Belen", 1111));
 //		datos.add(new Cliente(2,"Deccechis", "Juan", 1234));

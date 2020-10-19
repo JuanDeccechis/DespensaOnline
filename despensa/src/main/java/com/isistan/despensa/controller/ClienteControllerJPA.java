@@ -40,7 +40,6 @@ public class ClienteControllerJPA {
 	@PutMapping("/{id}")
 	@CrossOrigin
 	public void updateCliente(@RequestBody Cliente c, @PathVariable Integer id) { 
-		repository.deleteById(id);
 		repository.save(c);
 	}
 	
