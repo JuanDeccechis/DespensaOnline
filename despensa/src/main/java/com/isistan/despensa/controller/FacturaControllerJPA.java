@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isistan.despensa.dto.DTOFacturaClienteReporte;
 import com.isistan.despensa.model.Factura;
 import com.isistan.despensa.repository.FacturaRepository;
 
@@ -38,6 +39,12 @@ public class FacturaControllerJPA {
 	@CrossOrigin
 	public Iterable<Factura> getFacturas() { 
 		return repository.findAll();
+	}
+	
+	@GetMapping("/reporteClientes") 
+	@CrossOrigin
+	public Iterable<DTOFacturaClienteReporte> getReporteComprasClientes() { 
+		return repository.getReporteCliente();
 	}
 
 	@PostMapping("/")
