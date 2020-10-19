@@ -5,67 +5,56 @@ let tableHTML;
 let baseUrl = "http://localhost:8080/";
 
 document.querySelector("#clientes").addEventListener("click", crearContenidoClientes);
-//document.querySelector("#estudiantes").addEventListener("click", crearContenidoEstudiantes);
+cambdocument.querySelector("#facturas").addEventListener("click", crearContenidoFactura);
 //document.querySelector("#relaciones").addEventListener("click", crearContenidoRelaciones);
 
 formHTML = document.querySelector("#form");
 tableHTML = document.querySelector("#table");
 
 
-/*crea el formulario y el thead de estudiantes
-function crearContenidoEstudiantes() {
+// crea el formulario y el thead de estudiantes
+function crearContenidoFactura() {
     formHTML.innerHTML = '';
 
-    let campoNombre = document.createElement("input");
-    let campoApellido = document.createElement("input");
+    let campoID = document.createElement("input");
+    let campoFecha = document.createElement("input");
     let campoDni = document.createElement("input");
-    let campoGenero = document.createElement("select");
-    let campoEdad = document.createElement("input");
-    let campoCiudad_residencia = document.createElement("input");
+    //let campoProducto = document.createElement("select");
+     let campoEdad = document.createElement("input");
+    // let campoCiudad_residencia = document.createElement("input");
 
-    campoNombre.setAttribute('id', 'nombreEstudiante');
-    campoNombre.setAttribute('value', '');
-    campoNombre.setAttribute('placeHolder', 'nombre estudiante');
-    formHTML.appendChild(campoNombre);
-    campoApellido.setAttribute('id', 'apellidoEstudiante');
-    campoApellido.setAttribute('value', '');
-    campoApellido.setAttribute('placeHolder', 'apellido estudiante');
-    formHTML.appendChild(campoApellido);
-    let labelDni = document.createElement("span");
-    labelDni.innerHTML = "DNI: ";
-    campoDni.setAttribute('id', 'dniEstudiante');
+    campoId.setAttribute('id', 'idFactura');
+    campoId.setAttribute('value', '');
+    campoId.setAttribute('placeHolder', 'id Factura');
+    formHTML.appendChild(campoId);
+    //agregar que esto sea readOnly y funcion que lea la fecha 
+    campoFecha.setAttribute('id', 'Fecha');
+    campoFecha.setAttribute('value', '');
+    campoFecha.setAttribute('type', 'date');
+    formHTML.appendChild(campoFecha);
+     let labelDni = document.createElement("span");
+     labelDni.innerHTML = "DNI: ";
+    campoDni.setAttribute('id', 'dniCliente');
     campoDni.setAttribute('value', '');
     campoDni.setAttribute('type', 'number');
     formHTML.appendChild(labelDni);
-    formHTML.appendChild(campoDni);
-    let labelEdad = document.createElement("span");
-    labelEdad.innerHTML = "Edad: ";
-    campoEdad.setAttribute('id', 'edadEstudiante');
-    campoEdad.setAttribute('value', '');
-    campoEdad.setAttribute('type', 'number');
-    formHTML.appendChild(labelEdad);
-    formHTML.appendChild(campoEdad);
-    campoCiudad_residencia.setAttribute('id', 'ciudadEstudiante');
-    campoCiudad_residencia.setAttribute('value', '');
-    campoCiudad_residencia.setAttribute('placeHolder', 'ciudad estudiante');
-    formHTML.appendChild(campoCiudad_residencia);
-    let labelGenero = document.createElement("span");
-    labelGenero.innerHTML = "Genero: ";
-    campoGenero.setAttribute('id', 'generoEstudiante');
-    campoGenero.setAttribute('value', '');
-    let optionF = document.createElement("option");
-    optionF.text = "F";
-    campoGenero.add(optionF);
-    let optionM = document.createElement("option");
-    optionM.text = "M";
-    campoGenero.add(optionM);
-    formHTML.appendChild(labelGenero);
-    formHTML.appendChild(campoGenero);
+     formHTML.appendChild(campoDni);
+    let labelApellido = document.createElement("span");
+    labelApellido.innerHTML = "Apellido: ";
+     campoEdad.setAttribute('id', 'ApellidoCliente');
+     campoEdad.setAttribute('value', '');
+     campoEdad.setAttribute('placeholder', 'apellido cliente');
+     formHTML.appendChild(labelEdad);
+     formHTML.appendChild(campoEdad);
+     let label = document.createElement("span");
+   
+    // formHTML.appendChild(labelGenero);
+    // formHTML.appendChild(campoGenero);
 
     let botonPost = document.createElement("button");
     botonPost.setAttribute('class', 'btn-primary');
     botonPost.setAttribute('id', 'postEstudiante');
-    botonPost.addEventListener("click", addEstudiante);
+    botonPost.addEventListener("click", addFactura);
     botonPost.textContent = 'agregar estudiante';
     formHTML.appendChild(botonPost);
 
@@ -73,83 +62,83 @@ function crearContenidoEstudiantes() {
     let botonGet = document.createElement("button");
     botonGet.setAttribute('class', 'btn-primary');
     botonGet.setAttribute('id', 'getEstudiantes');
-    botonGet.addEventListener("click", getEstudiantes);
+    botonGet.addEventListener("click", getFactura);
     botonGet.textContent = 'listar estudiantes';
     formHTML.appendChild(botonGet);
 
-    let labelOrden = document.createElement("span");
-    let campoOrdenBusqueda = document.createElement("select");
-    labelOrden.innerHTML = "orden: ";
-    campoOrdenBusqueda.setAttribute('id', 'ordenBusqueda');
-    campoOrdenBusqueda.setAttribute('value', '');
-    let optionASC = document.createElement("option");
-    optionASC.text = "ASC";
-    campoOrdenBusqueda.add(optionASC);
-    let optionDESC = document.createElement("option");
-    optionDESC.text = "DESC";
-    campoOrdenBusqueda.add(optionDESC);
-    formHTML.appendChild(labelOrden);
-    formHTML.appendChild(campoOrdenBusqueda);
-    let botonGetApellido = document.createElement("button");
-    botonGetApellido.setAttribute('class', 'btn-primary');
-    botonGetApellido.setAttribute('id', 'getEstudiantesApellido');
-    botonGetApellido.addEventListener("click", getEstudiantesApellido);
-    botonGetApellido.textContent = 'ordenar estudiantes por apellido';
-    formHTML.appendChild(botonGetApellido);
+    // let labelOrden = document.createElement("span");
+    // let campoOrdenBusqueda = document.createElement("select");
+    // labelOrden.innerHTML = "orden: ";
+    // campoOrdenBusqueda.setAttribute('id', 'ordenBusqueda');
+    // campoOrdenBusqueda.setAttribute('value', '');
+    // let optionASC = document.createElement("option");
+    // optionASC.text = "ASC";
+    // campoOrdenBusqueda.add(optionASC);
+    // let optionDESC = document.createElement("option");
+    // optionDESC.text = "DESC";
+    // campoOrdenBusqueda.add(optionDESC);
+    // formHTML.appendChild(labelOrden);
+    // formHTML.appendChild(campoOrdenBusqueda);
+    // let botonGetApellido = document.createElement("button");
+    // botonGetApellido.setAttribute('class', 'btn-primary');
+    // botonGetApellido.setAttribute('id', 'getEstudiantesApellido');
+    // botonGetApellido.addEventListener("click", getEstudiantesApellido);
+    // botonGetApellido.textContent = 'ordenar estudiantes por apellido';
+    // formHTML.appendChild(botonGetApellido);
 
-    let campoLUBusqueda = document.createElement("input");
-    let labelLU = document.createElement("span");
-    labelLU.innerHTML = "LU: ";
-    campoLUBusqueda.setAttribute('value', '');
-    campoLUBusqueda.setAttribute('id', 'luEstudianteBusqueda');
-    campoLUBusqueda.setAttribute('type', 'number');
-    formHTML.appendChild(labelLU);
-    formHTML.appendChild(campoLUBusqueda);
-    let botonGetLU = document.createElement("button");
-    botonGetLU.setAttribute('class', 'btn-primary');
-    botonGetLU.setAttribute('id', 'getEstudianteLU');
-    botonGetLU.addEventListener("click", getEstudianteLU);
-    botonGetLU.textContent = 'un estudiante por LU';
-    formHTML.appendChild(botonGetLU);
+    // let campoLUBusqueda = document.createElement("input");
+    // let labelLU = document.createElement("span");
+    // labelLU.innerHTML = "LU: ";
+    // campoLUBusqueda.setAttribute('value', '');
+    // campoLUBusqueda.setAttribute('id', 'luEstudianteBusqueda');
+    // campoLUBusqueda.setAttribute('type', 'number');
+    // formHTML.appendChild(labelLU);
+    // formHTML.appendChild(campoLUBusqueda);
+    // let botonGetLU = document.createElement("button");
+    // botonGetLU.setAttribute('class', 'btn-primary');
+    // botonGetLU.setAttribute('id', 'getEstudianteLU');
+    // botonGetLU.addEventListener("click", getEstudianteLU);
+    // botonGetLU.textContent = 'un estudiante por LU';
+    // formHTML.appendChild(botonGetLU);
 
-    let campoGeneroBusqueda = document.createElement("select");
-    let labelGeneroBusqueda = document.createElement("span");
-    labelGeneroBusqueda.innerHTML = "Genero busqueda: ";
-    campoGeneroBusqueda.setAttribute('id', 'generoEstudianteBusqueda');
-    campoGeneroBusqueda.setAttribute('value', '');
-    let optionFBusqueda = document.createElement("option");
-    optionFBusqueda.text = "F";
-    campoGeneroBusqueda.add(optionFBusqueda);
-    let optionMBusqueda = document.createElement("option");
-    optionMBusqueda.text = "M";
-    campoGeneroBusqueda.add(optionMBusqueda);
-    formHTML.appendChild(labelGeneroBusqueda);
-    formHTML.appendChild(campoGeneroBusqueda);
-    let botonGetGenero = document.createElement("button");
-    botonGetGenero.setAttribute('class', 'btn-primary');
-    botonGetGenero.setAttribute('id', 'getEstudianteGenero');
-    botonGetGenero.addEventListener("click", getEstudianteGenero);
-    botonGetGenero.textContent = 'estudiantes por genero';
-    formHTML.appendChild(botonGetGenero);
+    // let campoGeneroBusqueda = document.createElement("select");
+    // let labelGeneroBusqueda = document.createElement("span");
+    // labelGeneroBusqueda.innerHTML = "Genero busqueda: ";
+    // campoGeneroBusqueda.setAttribute('id', 'generoEstudianteBusqueda');
+    // campoGeneroBusqueda.setAttribute('value', '');
+    // let optionFBusqueda = document.createElement("option");
+    // optionFBusqueda.text = "F";
+    // campoGeneroBusqueda.add(optionFBusqueda);
+    // let optionMBusqueda = document.createElement("option");
+    // optionMBusqueda.text = "M";
+    // campoGeneroBusqueda.add(optionMBusqueda);
+    // formHTML.appendChild(labelGeneroBusqueda);
+    // formHTML.appendChild(campoGeneroBusqueda);
+    // let botonGetGenero = document.createElement("button");
+    // botonGetGenero.setAttribute('class', 'btn-primary');
+    // botonGetGenero.setAttribute('id', 'getEstudianteGenero');
+    // botonGetGenero.addEventListener("click", getEstudianteGenero);
+    // botonGetGenero.textContent = 'estudiantes por genero';
+    // formHTML.appendChild(botonGetGenero);
 
 
-    let campoCarrera_Busqueda = document.createElement("input");
-    campoCarrera_Busqueda.setAttribute('id', 'carreraEstudianteBusqueda');
-    campoCarrera_Busqueda.setAttribute('value', '');
-    campoCarrera_Busqueda.setAttribute('placeHolder', 'carrera estudiante');
-    formHTML.appendChild(campoCarrera_Busqueda);
-    let campoCiudad_busqueda = document.createElement("input");
-    campoCiudad_busqueda.setAttribute('id', 'ciudadEstudianteBusqueda');
-    campoCiudad_busqueda.setAttribute('value', '');
-    campoCiudad_busqueda.setAttribute('placeHolder', 'ciudad estudiante');
-    formHTML.appendChild(campoCiudad_busqueda);
+    // let campoCarrera_Busqueda = document.createElement("input");
+    // campoCarrera_Busqueda.setAttribute('id', 'carreraEstudianteBusqueda');
+    // campoCarrera_Busqueda.setAttribute('value', '');
+    // campoCarrera_Busqueda.setAttribute('placeHolder', 'carrera estudiante');
+    // formHTML.appendChild(campoCarrera_Busqueda);
+    // let campoCiudad_busqueda = document.createElement("input");
+    // campoCiudad_busqueda.setAttribute('id', 'ciudadEstudianteBusqueda');
+    // campoCiudad_busqueda.setAttribute('value', '');
+    // campoCiudad_busqueda.setAttribute('placeHolder', 'ciudad estudiante');
+    // formHTML.appendChild(campoCiudad_busqueda);
 
-    let botonGetCarreraCiudad = document.createElement("button");
-    botonGetCarreraCiudad.setAttribute('class', 'btn-primary');
-    botonGetCarreraCiudad.setAttribute('id', 'getEstudianteCarreraCiudad');
-    botonGetCarreraCiudad.addEventListener("click", getEstudiantesCarreraCiudad);
-    botonGetCarreraCiudad.textContent = 'estudiantes de una carrera y ciudad';
-    formHTML.appendChild(botonGetCarreraCiudad);
+    // let botonGetCarreraCiudad = document.createElement("button");
+    // botonGetCarreraCiudad.setAttribute('class', 'btn-primary');
+    // botonGetCarreraCiudad.setAttribute('id', 'getEstudianteCarreraCiudad');
+    // botonGetCarreraCiudad.addEventListener("click", getEstudiantesCarreraCiudad);
+    // botonGetCarreraCiudad.textContent = 'estudiantes de una carrera y ciudad';
+    // formHTML.appendChild(botonGetCarreraCiudad);
 
     let colThead = document.createElement("thead");
     let colTr = document.createElement("tr");
@@ -194,7 +183,7 @@ function crearContenidoEstudiantes() {
     tableHTML.appendChild(colThead);
     tableHTML.appendChild(colTbody);
 }
-*/
+
 //crea el formulario y el thead de clientes
 function crearContenidoClientes() {
     formHTML.innerHTML = '';
@@ -209,7 +198,7 @@ function crearContenidoClientes() {
     campoNombre.setAttribute('id', 'nombreCliente');
     campoNombre.setAttribute('value', '');
     campoNombre.setAttribute('placeHolder', 'nombre cliente');
-    formHTML.appendChild(campoNombre);
+    formHTML.appendChild(campoId);
     
     let campoApellido = document.createElement("input");
     campoApellido.setAttribute('id', 'apellidoCliente');

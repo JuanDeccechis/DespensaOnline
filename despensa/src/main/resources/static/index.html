@@ -12,12 +12,12 @@
    
   </head>
   <body>
-	<h1>Despensa Web</h1>
+	<h1>Despensa Web-Branch Belen  </h1>
     <div class="container my-5 text-center">
 
         <button class="btn btn-danger w-30" id="clientes">trabajar con clientes</button>
-        <button class="btn btn-danger w-30" id="estudiantes">trabajar con productos</button>
-        <button class="btn btn-danger w-30" id="relaciones">trabajar con facturas</button>
+        <button class="btn btn-danger w-30" id="productos">trabajar con productos</button>
+        <button class="btn btn-danger w-30" id="facturas">trabajar con facturas</button>
         <div class="mt-5">
           <div id="form">
 
@@ -32,52 +32,7 @@
             </table>
         </div>
     </div>
-<!--
-    <script>
-          var contenido = document.querySelector('#contenido')
 
-          function traer() {
-              fetch('http://localhost:8080/Integrador3/rest/estudiantes')
-                  .then(res => res.json())
-                  .then(datos => {
-                      // console.log(datos)
-                      tabla(datos)
-                  })
-          }
-
-          function tabla(datos) {
-              // console.log(datos)
-              let tabla = ''
-              for(let valor of datos){
-                  // console.log(valor.nombre)
-
-                  tabla += `
-
-                    <tr>
-                      <th scope="row">${ valor.lu }</th>
-                      <td>${ valor.nombre }</td>
-                      <td>${ valor.apellido }</td>
-                      <td>${ valor.edad }</td>
-                      <td>${ valor.genero }</td>
-                      <td>${ valor.dni }</td>
-                      <td>${ valor.ciudad_residencia }</td>
-                      <td>
-                   `
-                  for(let algo of valor.carreras){
-                   tabla += `
-                    ${ algo.nombre_carrera }
-                   `
-                 }
-                   tabla += `</td>
-                   </tr> `
-                   console.log(valor.carreras);
-
-              }
-            contenido.innerHTML = tabla;
-          }
-
-      </script>
--->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
