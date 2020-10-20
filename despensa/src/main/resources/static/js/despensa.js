@@ -5,7 +5,7 @@ let tableHTML;
 let baseUrl = "http://localhost:8080/";
 
 document.querySelector("#clientes").addEventListener("click", crearContenidoClientes);
-cambdocument.querySelector("#facturas").addEventListener("click", crearContenidoFactura);
+document.querySelector("#facturas").addEventListener("click", crearContenidoFactura);
 //document.querySelector("#relaciones").addEventListener("click", crearContenidoRelaciones);
 
 formHTML = document.querySelector("#form");
@@ -16,7 +16,7 @@ tableHTML = document.querySelector("#table");
 function crearContenidoFactura() {
     formHTML.innerHTML = '';
 
-    let campoID = document.createElement("input");
+    let campoId = document.createElement("input");
     let campoFecha = document.createElement("input");
     let campoDni = document.createElement("input");
     //let campoProducto = document.createElement("select");
@@ -44,7 +44,7 @@ function crearContenidoFactura() {
      campoEdad.setAttribute('id', 'ApellidoCliente');
      campoEdad.setAttribute('value', '');
      campoEdad.setAttribute('placeholder', 'apellido cliente');
-     formHTML.appendChild(labelEdad);
+     formHTML.appendChild(labelApellido);
      formHTML.appendChild(campoEdad);
      let label = document.createElement("span");
    
@@ -200,11 +200,11 @@ function crearContenidoClientes() {
     campoNombre.setAttribute('placeHolder', 'nombre cliente');
     formHTML.appendChild(campoId);
     
-    let campoApellido = document.createElement("input");
+    let campoDescripcion = document.createElement("input");
     campoApellido.setAttribute('id', 'apellidoCliente');
-    campoApellido.setAttribute('value', '');
-    campoApellido.setAttribute('placeHolder', 'apellido cliente');
-    formHTML.appendChild(campoApellido);
+    campoDescripcion.setAttribute('value', '');
+    campoDescripcion.setAttribute('placeHolder', 'apellido cliente');
+    formHTML.appendChild(campoDescripcion);
     
     let campoDni = document.createElement("input");
     campoDni.setAttribute('id', 'dniCliente');
@@ -261,6 +261,103 @@ function crearContenidoClientes() {
     contenido = document.createTextNode("Dni");
     colThDni.appendChild(contenido);
     colTr.appendChild(colThDni);
+    colThead.appendChild(colTr);
+
+    let colTbody = document.createElement("tbody");
+    colTbody.setAttribute("id", "tbody");
+    tableHTML.innerHTML = '';
+    tableHTML.appendChild(colThead);
+    tableHTML.appendChild(colTbody);
+}
+
+//crear contenido producto
+function crearContenidoProducto(){
+    formHTML.innerHTML = '';
+
+    let campoId = document.createElement("input");
+    campoId.setAttribute('id', 'idProducto');
+    campoId.setAttribute('value', '');
+    campoId.setAttribute('placeHolder', 'id producto');
+    formHTML.appendChild(campoId);
+    
+    let campoNombre = document.createElement("input");
+    campoNombre.setAttribute('id', 'nombreProducto');
+    campoNombre.setAttribute('value', '');
+    campoNombre.setAttribute('placeHolder', 'nombre producto');
+    formHTML.appendChild(campoNombre);
+    
+    let campoDescripcion = document.createElement("input");
+    campoDescripcion.setAttribute('id', 'descripcion');
+    campoDescripcion.setAttribute('value', '');
+    campoDescripcion.setAttribute('placeHolder', 'descripcion producto');
+    formHTML.appendChild(campoDescripcion);
+    
+    let campoCantidad = document.createElement("input");
+    campoCantidad.setAttribute('id', 'cantidad');
+    campoCantidad.setAttribute('value', '');
+    campoCantidad.setAttribute('placeHolder', 'cantidad');
+    formHTML.appendChild(campoCantidad);
+    let campoPrecio = document.createElement("input");
+    campoPrecio.setAttribute('id', 'precio');
+    campoPrecio.setAttribute('value', '');
+    campoPrecio.setAttribute('placeHolder', 'precio');
+    formHTML.appendChild(campoCantidad);
+    
+    let botonPost = document.createElement("button");
+    botonPost.setAttribute('class', 'btn-primary');
+    botonPost.setAttribute('id', 'postProducto');
+    botonPost.addEventListener("click", addProducto);
+    botonPost.textContent = 'agregar producto';
+    formHTML.appendChild(botonPost);
+
+    let botonGet = document.createElement("button");
+    botonGet.setAttribute('class', 'btn-primary');
+    botonGet.setAttribute('id', 'getProductos');
+    botonGet.addEventListener("click", getProductos);
+    botonGet.textContent = 'listar productos';
+    formHTML.appendChild(botonGet);
+
+    let botonDelete = document.createElement("button");
+    botonDelete.setAttribute('class', 'btn-danger');
+    botonDelete.setAttribute('id', 'deleteProductos');
+    botonDelete.addEventListener("click", deleteCliente);
+    botonDelete.textContent = 'borrar productos por ID';
+    formHTML.appendChild(botonDelete);
+
+    let botonUpdate = document.createElement("button");
+    botonUpdate.setAttribute('class', 'btn-primary');
+    botonUpdate.setAttribute('id', 'getProductos');
+    botonUpdate.addEventListener("click", updateProductos);
+    botonUpdate.textContent = 'actualizar cliente';
+    formHTML.appendChild(botonUpdate);
+    //apartir de aca genera la tabla 
+    let colThead = document.createElement("thead");
+    let colTr = document.createElement("tr");
+    let colThID = document.createElement("th");
+    let contenido = document.createTextNode("ID");
+    colThID.appendChild(contenido);
+    colTr.appendChild(colThID);
+
+    let colThNombre = document.createElement("th");
+    contenido = document.createTextNode("NombreProducto");
+    colThNombre.appendChild(contenido);
+    colTr.appendChild(colThNombre);
+
+    let colThDescr = document.createElement("th");
+    contenido = document.createTextNode("Descripcion");
+    colThDescr.appendChild(contenido);
+    colTr.appendChild(colThDescr);
+
+    let colThCant = document.createElement("th");
+    contenido = document.createTextNode("Cantidad");
+    colThCant.appendChild(contenido);
+    colTr.appendChild(colThCant);
+    colThead.appendChild(colTr);
+
+    let colThPrecio = document.createElement("th");
+    contenido = document.createTextNode("Precio");
+    colThPrecio.appendChild(contenido);
+    colTr.appendChild(colThPrecio);
     colThead.appendChild(colTr);
 
     let colTbody = document.createElement("tbody");
@@ -411,27 +508,27 @@ function getClientes() {
         setTablaClientes(datos)
     })
 }
-/*
-//2F pedido REST para obtener las carreras ordenadas por cantidad de estudiantes inscriptos
-function getCarrerasOrdenEstudiantes() {
-    let url = baseUrl + "rest/carreras/orden/cantincriptos";
-    fetch(url)
-    .then(res => res.json())
-    .then(datos => {
-        setTablaCarreras(datos)
-    })
-}
+
+// //2F pedido REST para obtener las carreras ordenadas por cantidad de estudiantes inscriptos
+// function getCarrerasOrdenEstudiantes() {
+//     let url = baseUrl + "rest/carreras/orden/cantincriptos";
+//     fetch(url)
+//     .then(res => res.json())
+//     .then(datos => {
+//         setTablaCarreras(datos)
+//     })
+// }
 
 //pedido REST para obtener los estudiantes
-function getEstudiantes() {
-    let url = baseUrl + "rest/estudiantes";
+function getProductos() {
+    let url = baseUrl + "productos/";
     fetch(url)
     .then(res => res.json())
     .then(datos => {
-        setTablaEstudiantes(datos)
+        setTablaProductos(datos)
     })
 }
-
+/*
 //pedido REST para obtener las carreras y estudiantes relacionados
 function getMatriculas() {
   crearContenidoRelaciones()
@@ -539,24 +636,22 @@ function addCliente() {
     })
 }
 
-/*2A pedido REST para agregar un estudiante (campos: nombre, apellido, edad, dni, genero, ciudad)
-function addEstudiante() {
-    let nombreEstudiante = document.querySelector("#nombreEstudiante").value;
-    let apellidoEstudiante = document.querySelector("#apellidoEstudiante").value;
-    let edadEstudiante = document.querySelector("#edadEstudiante").value;
-    let dniEstudiante = document.querySelector("#dniEstudiante").value;
-    let generoEstudiante = document.querySelector("#generoEstudiante").value;
-    let ciudadEstudiante = document.querySelector("#ciudadEstudiante").value;
+
+function addProducto() {
+    let idProducto = document.querySelector("#idProducto").value;
+    let nombre = document.querySelector("#nombreProducto").value;
+    let descripcion = document.querySelector("#descripcion").value;
+    let cantidad = document.querySelector("#cantidad").value;
+    let precio = document.querySelector("#precio").value;
 
     let objeto = {
-        'nombre': nombreEstudiante,
-        'apellido': apellidoEstudiante,
-        'edad': edadEstudiante,
-        'dni': dniEstudiante,
-        'genero': generoEstudiante,
-        'ciudad_residencia': ciudadEstudiante
+        'id': idProducto,
+        'nombre': nombre,
+        'descripcion': descripcion,
+        'cantidad': cantidad,
+        'precio': precio,
     }
-    let url = baseUrl + "rest/estudiantes"
+    let url = baseUrl + "productos/"
     fetch(url, {
         "method": 'POST',
         "headers": {
@@ -580,7 +675,7 @@ function addEstudiante() {
         console.log("Error en CREATE: " + error);
     })
 }
-
+/*
 //2B pedido REST para matricular un alumno en una carrera (campos: LU, id_carrera, fecha_ingreso, fecha_egreso, y si se graduo)
 function addMatricula() {
     let LUMatricula = document.querySelector("#LUMatricula").value;
@@ -763,30 +858,26 @@ function setTablaMatriculasReporte(datos) {
     }
 }
 
-//incorpora el resultado de la consulta a una tabla de estudiantes
-function setTablaEstudiantes(datos) {
+*/
+function setTablaProductos(datos) {
     let colTr;
     let colTdId;
     let contenidoId;
     let colTdNombre;
     let contenidoNombre;
 
-    let colTdApellido;
-    let contenidoApellido;
-    let colTdEdad;
-    let contenidoEdad;
-    let colTdGenero;
-    let contenidoGenero;
-    let colTdCiudad;
-    let contenidoCiudad;
-    let colTdDni;
-    let contenidoDni;
+    let colTdDescr;
+    let contenidoDescr;
+    let colTdcantidad;
+    let contenidoCantidad;
+    let colTdPrecio;
+    let contenidoPrecio;
     let tbody = document.querySelector("tbody");
     tbody.innerHTML = "";
     for (let index = 0; index < datos.length; index++) {
         colTr = document.createElement("tr");
         colTdId = document.createElement("td");
-        contenidoId = document.createTextNode(datos[index].lu);
+        contenidoId = document.createTextNode(datos[index].id);
         colTdId.appendChild(contenidoId);
         colTr.appendChild(colTdId);
         colTdNombre = document.createElement("td");
@@ -795,34 +886,24 @@ function setTablaEstudiantes(datos) {
         colTr.appendChild(colTdNombre);
 
 
-        colTdApellido = document.createElement("td");
-        contenidoApellido = document.createTextNode(datos[index].apellido);
-        colTdApellido.appendChild(contenidoApellido);
-        colTr.appendChild(colTdApellido);
+        colTdDescr = document.createElement("td");
+        contenidoDescr = document.createTextNode(datos[index].descripcion);
+        colTdApellido.appendChild(contenidoDescr);
+        colTr.appendChild(colTdDescr);
 
-        colTdEdad = document.createElement("td");
-        contenidoEdad = document.createTextNode(datos[index].edad);
-        colTdEdad.appendChild(contenidoEdad);
-        colTr.appendChild(colTdEdad);
+        colTdcantidad = document.createElement("td");
+        contenidoCantidad = document.createTextNode(datos[index].cantidad);
+        colTdEdad.appendChild(contenidoCantidad);
+        colTr.appendChild(colTdcantidad);
 
-        colTdGenero = document.createElement("td");
-        contenidoGenero = document.createTextNode(datos[index].genero);
-        colTdGenero.appendChild(contenidoGenero);
-        colTr.appendChild(colTdGenero);
-
-        colTdDni = document.createElement("td");
-        contenidoDni = document.createTextNode(datos[index].dni);
-        colTdDni.appendChild(contenidoDni);
-        colTr.appendChild(colTdDni);
-
-        colTdCiudad = document.createElement("td");
-        contenidoCiudad = document.createTextNode(datos[index].ciudad_residencia);
-        colTdCiudad.appendChild(contenidoCiudad);
-        colTr.appendChild(colTdCiudad);
+        colTdPrecio = document.createElement("td");
+        contenidoPrecio = document.createTextNode(datos[index].precio);
+        colTdPrecio.appendChild(contenidoPrecio);
+        colTr.appendChild(colTdPrecio);
         tbody.appendChild(colTr);
     }
 }
-*/
+
 
 function deleteCliente() {
     let idCliente = document.querySelector("#idCliente").value;
