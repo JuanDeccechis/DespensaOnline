@@ -27,7 +27,7 @@ function crearContenidoFactura() {
     campoId.setAttribute('value', '');
     campoId.setAttribute('placeHolder', 'id Factura');
     formHTML.appendChild(campoId);
-    //agregar que esto sea readOnly y funcion que lea la fecha 
+    //agregar que esto sea readOnly y funcion que lea la fecha
     campoFecha.setAttribute('id', 'Fecha');
     campoFecha.setAttribute('value', '');
     campoFecha.setAttribute('type', 'date');
@@ -47,7 +47,7 @@ function crearContenidoFactura() {
      formHTML.appendChild(labelApellido);
      formHTML.appendChild(campoEdad);
      let label = document.createElement("span");
-   
+
     // formHTML.appendChild(labelGenero);
     // formHTML.appendChild(campoGenero);
 
@@ -193,25 +193,25 @@ function crearContenidoClientes() {
     campoId.setAttribute('value', '');
     campoId.setAttribute('placeHolder', 'id cliente');
     formHTML.appendChild(campoId);
-    
+
     let campoNombre = document.createElement("input");
     campoNombre.setAttribute('id', 'nombreCliente');
     campoNombre.setAttribute('value', '');
     campoNombre.setAttribute('placeHolder', 'nombre cliente');
-    formHTML.appendChild(campoId);
-    
-    let campoDescripcion = document.createElement("input");
+    formHTML.appendChild(campoNombre);
+
+    let campoApellido = document.createElement("input");
     campoApellido.setAttribute('id', 'apellidoCliente');
-    campoDescripcion.setAttribute('value', '');
-    campoDescripcion.setAttribute('placeHolder', 'apellido cliente');
-    formHTML.appendChild(campoDescripcion);
-    
+    campoApellido.setAttribute('value', '');
+    campoApellido.setAttribute('placeHolder', 'apellido cliente');
+    formHTML.appendChild(campoApellido);
+
     let campoDni = document.createElement("input");
     campoDni.setAttribute('id', 'dniCliente');
     campoDni.setAttribute('value', '');
     campoDni.setAttribute('placeHolder', 'dni cliente');
     formHTML.appendChild(campoDni);
-    
+
     let botonPost = document.createElement("button");
     botonPost.setAttribute('class', 'btn-primary');
     botonPost.setAttribute('id', 'postCliente');
@@ -279,19 +279,19 @@ function crearContenidoProducto(){
     campoId.setAttribute('value', '');
     campoId.setAttribute('placeHolder', 'id producto');
     formHTML.appendChild(campoId);
-    
+
     let campoNombre = document.createElement("input");
     campoNombre.setAttribute('id', 'nombreProducto');
     campoNombre.setAttribute('value', '');
     campoNombre.setAttribute('placeHolder', 'nombre producto');
     formHTML.appendChild(campoNombre);
-    
+
     let campoDescripcion = document.createElement("input");
     campoDescripcion.setAttribute('id', 'descripcion');
     campoDescripcion.setAttribute('value', '');
     campoDescripcion.setAttribute('placeHolder', 'descripcion producto');
     formHTML.appendChild(campoDescripcion);
-    
+
     let campoCantidad = document.createElement("input");
     campoCantidad.setAttribute('id', 'cantidad');
     campoCantidad.setAttribute('value', '');
@@ -302,7 +302,7 @@ function crearContenidoProducto(){
     campoPrecio.setAttribute('value', '');
     campoPrecio.setAttribute('placeHolder', 'precio');
     formHTML.appendChild(campoCantidad);
-    
+
     let botonPost = document.createElement("button");
     botonPost.setAttribute('class', 'btn-primary');
     botonPost.setAttribute('id', 'postProducto');
@@ -330,7 +330,7 @@ function crearContenidoProducto(){
     botonUpdate.addEventListener("click", updateProductos);
     botonUpdate.textContent = 'actualizar cliente';
     formHTML.appendChild(botonUpdate);
-    //apartir de aca genera la tabla 
+    //apartir de aca genera la tabla
     let colThead = document.createElement("thead");
     let colTr = document.createElement("tr");
     let colThID = document.createElement("th");
