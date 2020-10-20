@@ -1,7 +1,7 @@
 package com.isistan.despensa.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -56,9 +56,9 @@ public class Factura implements Serializable{
 	
 	
 
-	public Factura( Cliente cliente, List<Producto> productos,Date fecha) {
+	public Factura( Cliente cliente, List<Producto> productos,Date date) {
 		super();
-		this.fecha = fecha;
+		this.fecha = date;
 		this.cliente = cliente;
 		this.productos = productos;
 	}

@@ -41,7 +41,7 @@ public class Producto{
 
 
 	@Column
-	private Integer cantidad;
+	private Integer stock;
 	
 	@Column
 	private Double precio;
@@ -55,7 +55,7 @@ public class Producto{
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.cantidad = cantidad;
+		this.stock = cantidad;
 		this.precio = precio;
 	}
 
@@ -63,7 +63,7 @@ public class Producto{
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.cantidad = cantidad;
+		this.stock = cantidad;
 		this.precio = precio;
 	}
 
