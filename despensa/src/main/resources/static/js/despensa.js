@@ -41,11 +41,11 @@ function crearContenidoFactura() {
      campoProducto1.setAttribute('value', '');
      campoProducto1.setAttribute('placeholder', 'id producto 1');
     formHTML.appendChild(campoProducto1);
-    campoProducto2.setAttribute('id', 'idProducto1');
+    campoProducto2.setAttribute('id', 'idProducto2');
     campoProducto2.setAttribute('value', '');
     campoProducto2.setAttribute('placeholder', 'id producto 2');
     formHTML.appendChild(campoProducto2);
-    campoProducto3.setAttribute('id', 'idProducto1');
+    campoProducto3.setAttribute('id', 'idProducto3');
     campoProducto3.setAttribute('value', '');
     campoProducto3.setAttribute('placeholder', 'id producto 3');
     formHTML.appendChild(campoProducto3);
@@ -53,9 +53,16 @@ function crearContenidoFactura() {
     let botonPost = document.createElement("button");
     botonPost.setAttribute('class', 'btn-primary');
     botonPost.setAttribute('id', 'postEstudiante');
-   // botonPost.addEventListener("click", addFactura);
-    botonPost.textContent = 'agregar estudiante';
+    botonPost.addEventListener("click", addFactura);
+    botonPost.textContent = 'agregar factura';
     formHTML.appendChild(botonPost);
+
+    let botonUpdate = document.createElement("button");
+    botonUpdate.setAttribute('class', 'btn-primary');
+    botonUpdate.setAttribute('id', 'getFactura');
+    botonUpdate.addEventListener("click", updateFactura);
+    botonUpdate.textContent = 'actualizar factura';
+    formHTML.appendChild(botonUpdate);
 
 
     let botonGet = document.createElement("button");
@@ -523,27 +530,34 @@ function addProducto() {
         console.log("Error en CREATE: " + error);
     })
 }
-/*
-//2B pedido REST para matricular un alumno en una carrera (campos: LU, id_carrera, fecha_ingreso, fecha_egreso, y si se graduo)
-function addMatricula() {
-    let LUMatricula = document.querySelector("#LUMatricula").value;
-    let idCarreraMatricula = document.querySelector("#idCarreraMatricula").value;
-    let fechaIngresoMatricula = document.querySelector("#fechaIngresoMatricula").value;
-    let fechaEgresoMatricula = document.querySelector("#fechaEgresoMatricula").value;
-    let egresoMatricula = false;
-    if (fechaEgresoMatricula) {
-        egresoMatricula = true;
-    }
+function addFactura() {
+    let idFactura = document.querySelector("#idFactura").value;
+    let Fecha = document.querySelector("#Fecha").value;
+    let cliente = document.querySelector("#idCliente").value;
+    let producto1 = document.querySelector("#idProducto1").value;
+    let producto2 = document.querySelector("#idProducto2").value;
+    let producto3 = document.querySelector("#idProducto3").value;
 
     let objeto = {
-        'estudiante': parseInt(LUMatricula),
-        'carrera': parseInt(idCarreraMatricula),
-        'fecha_inscripcion': fechaIngresoMatricula,
-        'fecha_egreso': fechaEgresoMatricula,
-        'graduado': egresoMatricula
+            "id": idFactura,
+            "fecha": Fecha,
+            "cliente": {
+                "id":cliente
+                
+            },
+            "productos": [
+                {
+                    "id": producto1
+                },
+                {
+                    "id":producto2
+                },
+                {
+                    "id":producto3
+                }
+            ]
     }
-
-    let url = baseUrl + "rest/matriculas"
+    let url = baseUrl + "facturas/"
     fetch(url, {
         "method": 'POST',
         "headers": {
@@ -553,11 +567,11 @@ function addMatricula() {
     })
         .then(function(r){
             let resultado = document.querySelector("#resultado");
-            resultado.innerHTML = "POST matricula status: " + r.status;
+            resultado.innerHTML = "POST Estudiante status: " + r.status;
             if (r.status === 204) {
-                resultado.innerHTML += " error";
+                resultado.innerHTML += " Ya existia una factura con ese nombre";
             } else {
-                getMatriculas();
+                 getFacturas();
             }
             setTimeout(function() {
 				resultado.innerHTML = '';
@@ -567,7 +581,8 @@ function addMatricula() {
         console.log("Error en CREATE: " + error);
     })
 }
-*/
+
+
 //incorpora el resultado de la consulta a una tabla de carreras
 function setTablaClientes(datos) {
     let colTr;
@@ -908,6 +923,58 @@ function updateProducto() {
             }
             else {
                 getProductos();
+            }
+            setTimeout(function() {
+				resultado.innerHTML = '';
+				}, 3000);
+        })
+    .catch(function(error){
+        console.log("Error en UPDATE: " + error);
+    })
+}
+function updateFactura() {
+    let idFactura = document.querySelector("#idFactura").value;
+    let Fecha = document.querySelector("#Fecha").value;
+    let cliente = document.querySelector("#idCliente").value;
+    let producto1 = document.querySelector("#idProducto1").value;
+    let producto2 = document.querySelector("#idProducto2").value;
+    let producto3 = document.querySelector("#idProducto3").value;
+
+    let objeto = {
+            "id": idFactura,
+            "fecha": Fecha,
+            "cliente": {
+                "id":cliente
+                
+            },
+            "productos": [
+                {
+                    "id": producto1
+                },
+                {
+                    "id":producto2
+                },
+                {
+                    "id":producto3
+                }
+            ]
+    }
+    let url = baseUrl + "facturas/" + idFactura;
+    fetch(url, {
+        "method": 'PUT',
+        "headers": {
+            'Content-Type': 'application/json'
+        },
+        "body": JSON.stringify(objeto)
+    })
+        .then(function(r){
+            let resultado = document.querySelector("#resultado");
+            resultado.innerHTML = "PUT Cliente status: " + r.status;
+            if (r.status === 204) {
+                resultado.innerHTML += " No existia una factura con ese id";
+            }
+            else {
+                getFacturas();
             }
             setTimeout(function() {
 				resultado.innerHTML = '';
