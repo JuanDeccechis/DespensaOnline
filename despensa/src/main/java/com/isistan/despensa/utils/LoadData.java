@@ -45,13 +45,13 @@ public class LoadData {
 	CommandLineRunner initDataBaseProducto(@Qualifier("productoRepository") ProductoRepository repository) {
 		Faker faker = new Faker(new Locale("es"));
 		List<Producto> datos = new ArrayList<Producto> ();
-		for (int i = 1; i <= CANTMAXPRODUCTOS; i++) {
-			datos.add(new Producto(i,faker.commerce().productName(),faker.lorem().word(), faker.number().numberBetween(1, 50), faker.number().randomDouble(2, 50, 500)));
-		}
-//		datos.add(new Producto(1,"Lavandina","Lorem lorem", 10, 150.00));
-//		datos.add(new Producto(2,"Tallarines","Lorem lorem", 10, 100.00));
-//		datos.add(new Producto(3,"Detergente","Lorem lorem", 10, 115.00));
-//		datos.add(new Producto(4,"Coca Cola","Lorem lorem", 10, 150.00));
+		 for (int i = 1; i <= CANTMAXPRODUCTOS; i++) {
+		 	datos.add(new Producto(i,faker.commerce().productName(),faker.lorem().word(), faker.number().numberBetween(1, 50), faker.number().randomDouble(2, 50, 500)));
+		 }
+		//datos.add(new Producto(1,"Lavandina","Lorem lorem", 10, 150.00));
+		//datos.add(new Producto(2,"Tallarines","Lorem lorem", 10, 100.00));
+		//datos.add(new Producto(3,"Detergente","Lorem lorem", 10, 115.00));
+		//datos.add(new Producto(4,"Coca Cola","Lorem lorem", 10, 150.00));
 		repository.saveAll(datos);
 		return null;
 	}
