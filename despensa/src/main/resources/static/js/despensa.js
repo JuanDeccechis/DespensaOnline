@@ -6,6 +6,7 @@ let baseUrl = "http://localhost:8080/";
 
 document.querySelector("#clientes").addEventListener("click", crearContenidoClientes);
 document.querySelector("#facturas").addEventListener("click", crearContenidoFactura);
+document.querySelector("#productos").addEventListener("click", crearContenidoProducto);
 //document.querySelector("#relaciones").addEventListener("click", crearContenidoRelaciones);
 
 formHTML = document.querySelector("#form");
@@ -187,25 +188,25 @@ function crearContenidoFactura() {
 //crea el formulario y el thead de clientes
 function crearContenidoClientes() {
     formHTML.innerHTML = '';
-
+//campoId
     let campoId = document.createElement("input");
     campoId.setAttribute('id', 'idCliente');
     campoId.setAttribute('value', '');
     campoId.setAttribute('placeHolder', 'id cliente');
     formHTML.appendChild(campoId);
-    
+    //campoNombre de cliente
     let campoNombre = document.createElement("input");
     campoNombre.setAttribute('id', 'nombreCliente');
     campoNombre.setAttribute('value', '');
     campoNombre.setAttribute('placeHolder', 'nombre cliente');
-    formHTML.appendChild(campoId);
-    
-    let campoDescripcion = document.createElement("input");
+    formHTML.appendChild(campoNombre);
+    //campoApellido apellido cliente
+    let campoApellido = document.createElement("input");
     campoApellido.setAttribute('id', 'apellidoCliente');
-    campoDescripcion.setAttribute('value', '');
-    campoDescripcion.setAttribute('placeHolder', 'apellido cliente');
-    formHTML.appendChild(campoDescripcion);
-    
+    campoApellido.setAttribute('value', '');
+    campoApellido.setAttribute('placeHolder', 'apellido cliente');
+    formHTML.appendChild(campoApellido);
+    //campoDni
     let campoDni = document.createElement("input");
     campoDni.setAttribute('id', 'dniCliente');
     campoDni.setAttribute('value', '');
@@ -327,8 +328,8 @@ function crearContenidoProducto(){
     let botonUpdate = document.createElement("button");
     botonUpdate.setAttribute('class', 'btn-primary');
     botonUpdate.setAttribute('id', 'getProductos');
-    botonUpdate.addEventListener("click", updateProductos);
-    botonUpdate.textContent = 'actualizar cliente';
+    botonUpdate.addEventListener("click", updateProducto);
+    botonUpdate.textContent = 'actualizar producto';
     formHTML.appendChild(botonUpdate);
     //apartir de aca genera la tabla 
     let colThead = document.createElement("thead");
@@ -525,7 +526,8 @@ function getProductos() {
     fetch(url)
     .then(res => res.json())
     .then(datos => {
-        setTablaProductos(datos)
+        console.log(datos);
+        //setTablaProductos(datos)
     })
 }
 /*
@@ -888,12 +890,11 @@ function setTablaProductos(datos) {
 
         colTdDescr = document.createElement("td");
         contenidoDescr = document.createTextNode(datos[index].descripcion);
-        colTdApellido.appendChild(contenidoDescr);
+        colTdDescr.appendChild(contenidoDescr);
         colTr.appendChild(colTdDescr);
-
         colTdcantidad = document.createElement("td");
         contenidoCantidad = document.createTextNode(datos[index].cantidad);
-        colTdEdad.appendChild(contenidoCantidad);
+        colTdcantidad.appendChild(contenidoCantidad);
         colTr.appendChild(colTdcantidad);
 
         colTdPrecio = document.createElement("td");
@@ -907,6 +908,7 @@ function setTablaProductos(datos) {
 
 function deleteCliente() {
     let idCliente = document.querySelector("#idCliente").value;
+    console.log(idCliente);
     let url = baseUrl + "clientes/" + idCliente;
     fetch(url, {
         "method": 'DELETE',
@@ -967,4 +969,40 @@ function updateCliente() {
     .catch(function(error){
         console.log("Error en UPDATE: " + error);
     })
+}
+function updateProducto() {
+    // let idCliente = document.querySelector("#idCliente").value;
+    // let nombreCliente = document.querySelector("#nombreCliente").value;
+    // let apellidoCliente = document.querySelector("#apellidoCliente").value;
+    // let dniCliente = document.querySelector("#dniCliente").value;
+    // let objeto = {
+    //     'id': idCliente,
+    //     'apellido': apellidoCliente,
+    //     'nombre': nombreCliente,
+    //     'dni': dniCliente
+    // }
+    // let url = baseUrl + "clientes/" + idCliente;
+    // fetch(url, {
+    //     "method": 'PUT',
+    //     "headers": {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     "body": JSON.stringify(objeto)
+    // })
+    //     .then(function(r){
+    //         let resultado = document.querySelector("#resultado");
+    //         resultado.innerHTML = "PUT Cliente status: " + r.status;
+    //         if (r.status === 204) {
+    //             resultado.innerHTML += " No existia un cliente con ese id";
+    //         }
+    //         else {
+    //             getClientes();
+    //         }
+    //         setTimeout(function() {
+	// 			resultado.innerHTML = '';
+	// 			}, 3000);
+    //     })
+    // .catch(function(error){
+    //     console.log("Error en UPDATE: " + error);
+    // })
 }

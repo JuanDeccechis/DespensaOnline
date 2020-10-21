@@ -43,22 +43,22 @@ public class LoadData {
 	
 	@Bean
 	CommandLineRunner initDataBaseProducto(@Qualifier("productoRepository") ProductoRepository repository) {
-		Faker faker = new Faker(new Locale("es"));
+		//Faker faker = new Faker(new Locale("es"));
 		List<Producto> datos = new ArrayList<Producto> ();
-		for (int i = 1; i <= CANTMAXPRODUCTOS; i++) {
-			datos.add(new Producto(i,faker.commerce().productName(),faker.lorem().word(), faker.number().numberBetween(1, 50), faker.number().randomDouble(2, 50, 500)));
-		}
-//		datos.add(new Producto(1,"Lavandina","Lorem lorem", 10, 150.00));
-//		datos.add(new Producto(2,"Tallarines","Lorem lorem", 10, 100.00));
-//		datos.add(new Producto(3,"Detergente","Lorem lorem", 10, 115.00));
-//		datos.add(new Producto(4,"Coca Cola","Lorem lorem", 10, 150.00));
+		// for (int i = 1; i <= CANTMAXPRODUCTOS; i++) {
+		// 	datos.add(new Producto(i,faker.commerce().productName(),faker.lorem().word(), faker.number().numberBetween(1, 50), faker.number().randomDouble(2, 50, 500)));
+		// }
+		datos.add(new Producto(1,"Lavandina","Lorem lorem", 10, 150.00));
+		datos.add(new Producto(2,"Tallarines","Lorem lorem", 10, 100.00));
+		datos.add(new Producto(3,"Detergente","Lorem lorem", 10, 115.00));
+		datos.add(new Producto(4,"Coca Cola","Lorem lorem", 10, 150.00));
 		repository.saveAll(datos);
 		return null;
 	}
 	
 	@Bean
 	CommandLineRunner initDataBaseFactura(@Qualifier("facturaRepository") FacturaRepository repository) {
-		Faker faker = new Faker(new Locale("es"));
+		/*Faker faker = new Faker(new Locale("es"));
 		List<Factura> facturas = new ArrayList<Factura> ();
 		for (int i = 1; i <= CANTMAXCLIENTES; i++) {
 			List<Producto> productos = new ArrayList<Producto> ();
@@ -67,7 +67,7 @@ public class LoadData {
 			}
 			facturas.add(new Factura(new Cliente(i,"", "", 0),productos, faker.date().past(faker.number().numberBetween(3, 8), TimeUnit.DAYS)));
 		}
-		repository.saveAll(facturas);
+		repository.saveAll(facturas);*/
 		return null;
 	}
 }
