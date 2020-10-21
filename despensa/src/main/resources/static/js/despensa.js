@@ -1,5 +1,4 @@
 "use strict";
-
 let formHTML;
 let tableHTML;
 let baseUrl = "http://localhost:8080/";
@@ -28,7 +27,7 @@ function crearContenidoFactura() {
     campoId.setAttribute('value', '');
     campoId.setAttribute('placeHolder', 'id Factura');
     formHTML.appendChild(campoId);
-    //agregar que esto sea readOnly y funcion que lea la fecha 
+    //agregar que esto sea readOnly y funcion que lea la fecha
     campoFecha.setAttribute('id', 'Fecha');
     campoFecha.setAttribute('value', '');
     campoFecha.setAttribute('type', 'date');
@@ -48,7 +47,7 @@ function crearContenidoFactura() {
      formHTML.appendChild(labelApellido);
      formHTML.appendChild(campoEdad);
      let label = document.createElement("span");
-   
+
     // formHTML.appendChild(labelGenero);
     // formHTML.appendChild(campoGenero);
 
@@ -194,25 +193,26 @@ function crearContenidoClientes() {
     campoId.setAttribute('value', '');
     campoId.setAttribute('placeHolder', 'id cliente');
     formHTML.appendChild(campoId);
-    //campoNombre de cliente
     let campoNombre = document.createElement("input");
     campoNombre.setAttribute('id', 'nombreCliente');
     campoNombre.setAttribute('value', '');
     campoNombre.setAttribute('placeHolder', 'nombre cliente');
     formHTML.appendChild(campoNombre);
-    //campoApellido apellido cliente
+
+
     let campoApellido = document.createElement("input");
     campoApellido.setAttribute('id', 'apellidoCliente');
     campoApellido.setAttribute('value', '');
     campoApellido.setAttribute('placeHolder', 'apellido cliente');
     formHTML.appendChild(campoApellido);
-    //campoDni
+
+
     let campoDni = document.createElement("input");
     campoDni.setAttribute('id', 'dniCliente');
     campoDni.setAttribute('value', '');
     campoDni.setAttribute('placeHolder', 'dni cliente');
     formHTML.appendChild(campoDni);
-    
+
     let botonPost = document.createElement("button");
     botonPost.setAttribute('class', 'btn-primary');
     botonPost.setAttribute('id', 'postCliente');
@@ -280,19 +280,19 @@ function crearContenidoProducto(){
     campoId.setAttribute('value', '');
     campoId.setAttribute('placeHolder', 'id producto');
     formHTML.appendChild(campoId);
-    
+
     let campoNombre = document.createElement("input");
     campoNombre.setAttribute('id', 'nombreProducto');
     campoNombre.setAttribute('value', '');
     campoNombre.setAttribute('placeHolder', 'nombre producto');
     formHTML.appendChild(campoNombre);
-    
+
     let campoDescripcion = document.createElement("input");
     campoDescripcion.setAttribute('id', 'descripcion');
     campoDescripcion.setAttribute('value', '');
     campoDescripcion.setAttribute('placeHolder', 'descripcion producto');
     formHTML.appendChild(campoDescripcion);
-    
+
     let campoCantidad = document.createElement("input");
     campoCantidad.setAttribute('id', 'cantidad');
     campoCantidad.setAttribute('value', '');
@@ -302,8 +302,8 @@ function crearContenidoProducto(){
     campoPrecio.setAttribute('id', 'precio');
     campoPrecio.setAttribute('value', '');
     campoPrecio.setAttribute('placeHolder', 'precio');
-    formHTML.appendChild(campoCantidad);
-    
+    formHTML.appendChild(campoPrecio);
+
     let botonPost = document.createElement("button");
     botonPost.setAttribute('class', 'btn-primary');
     botonPost.setAttribute('id', 'postProducto');
@@ -321,7 +321,7 @@ function crearContenidoProducto(){
     let botonDelete = document.createElement("button");
     botonDelete.setAttribute('class', 'btn-danger');
     botonDelete.setAttribute('id', 'deleteProductos');
-    botonDelete.addEventListener("click", deleteCliente);
+    botonDelete.addEventListener("click", deleteProducto);
     botonDelete.textContent = 'borrar productos por ID';
     formHTML.appendChild(botonDelete);
 
@@ -331,7 +331,7 @@ function crearContenidoProducto(){
     botonUpdate.addEventListener("click", updateProducto);
     botonUpdate.textContent = 'actualizar producto';
     formHTML.appendChild(botonUpdate);
-    //apartir de aca genera la tabla 
+    //apartir de aca genera la tabla
     let colThead = document.createElement("thead");
     let colTr = document.createElement("tr");
     let colThID = document.createElement("th");
@@ -527,7 +527,7 @@ function getProductos() {
     .then(res => res.json())
     .then(datos => {
         console.log(datos);
-        //setTablaProductos(datos)
+        setTablaProductos(datos)
     })
 }
 /*
@@ -650,7 +650,7 @@ function addProducto() {
         'id': idProducto,
         'nombre': nombre,
         'descripcion': descripcion,
-        'cantidad': cantidad,
+        'stock': cantidad,
         'precio': precio,
     }
     let url = baseUrl + "productos/"
@@ -665,9 +665,9 @@ function addProducto() {
             let resultado = document.querySelector("#resultado");
             resultado.innerHTML = "POST Estudiante status: " + r.status;
             if (r.status === 204) {
-                resultado.innerHTML += " Ya existia un estudiante con ese DNI";
+                resultado.innerHTML += " Ya existia un producto con ese nombre";
             } else {
-                getEstudiantes();
+                 getProductos();
             }
             setTimeout(function() {
 				resultado.innerHTML = '';
@@ -893,7 +893,7 @@ function setTablaProductos(datos) {
         colTdDescr.appendChild(contenidoDescr);
         colTr.appendChild(colTdDescr);
         colTdcantidad = document.createElement("td");
-        contenidoCantidad = document.createTextNode(datos[index].cantidad);
+        contenidoCantidad = document.createTextNode(datos[index].stock);
         colTdcantidad.appendChild(contenidoCantidad);
         colTr.appendChild(colTdcantidad);
 
@@ -971,38 +971,68 @@ function updateCliente() {
     })
 }
 function updateProducto() {
-    // let idCliente = document.querySelector("#idCliente").value;
-    // let nombreCliente = document.querySelector("#nombreCliente").value;
-    // let apellidoCliente = document.querySelector("#apellidoCliente").value;
-    // let dniCliente = document.querySelector("#dniCliente").value;
-    // let objeto = {
-    //     'id': idCliente,
-    //     'apellido': apellidoCliente,
-    //     'nombre': nombreCliente,
-    //     'dni': dniCliente
-    // }
-    // let url = baseUrl + "clientes/" + idCliente;
-    // fetch(url, {
-    //     "method": 'PUT',
-    //     "headers": {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     "body": JSON.stringify(objeto)
-    // })
-    //     .then(function(r){
-    //         let resultado = document.querySelector("#resultado");
-    //         resultado.innerHTML = "PUT Cliente status: " + r.status;
-    //         if (r.status === 204) {
-    //             resultado.innerHTML += " No existia un cliente con ese id";
-    //         }
-    //         else {
-    //             getClientes();
-    //         }
-    //         setTimeout(function() {
-	// 			resultado.innerHTML = '';
-	// 			}, 3000);
-    //     })
-    // .catch(function(error){
-    //     console.log("Error en UPDATE: " + error);
-    // })
+    let idProducto = document.querySelector("#idProducto").value;
+    let nombreProducto = document.querySelector("#nombreProducto").value;
+    let descripcion = document.querySelector("#descripcion").value;
+    let cantidad = document.querySelector("#cantidad").value;
+    let precio = document.querySelector("#precio").value;
+    let objeto = {
+        'id': idProducto,
+        'nombre': nombreProducto,
+        'descripcion': descripcion,
+        'stock': cantidad,
+        'precio': precio,
+    }
+    let url = baseUrl + "productos/" + idProducto;
+    fetch(url, {
+        "method": 'PUT',
+        "headers": {
+            'Content-Type': 'application/json'
+        },
+        "body": JSON.stringify(objeto)
+    })
+        .then(function(r){
+            let resultado = document.querySelector("#resultado");
+            resultado.innerHTML = "PUT Cliente status: " + r.status;
+            if (r.status === 204) {
+                resultado.innerHTML += " No existia un cliente con ese id";
+            }
+            else {
+                getProductos();
+            }
+            setTimeout(function() {
+				resultado.innerHTML = '';
+				}, 3000);
+        })
+    .catch(function(error){
+        console.log("Error en UPDATE: " + error);
+    })
+}
+
+function deleteProducto() {
+    let idProducto = document.querySelector("#idProducto").value;
+    console.log(idProducto);
+    let url = baseUrl + "productos/" + idProducto;
+    fetch(url, {
+        "method": 'DELETE',
+        "headers": {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(function(r){
+        let resultado = document.querySelector("#resultado");
+        resultado.innerHTML = "DELETE Cliente status: " + r.status;
+        if (r.status === 204) {
+            resultado.innerHTML += " No existia un cliente con ese id";
+        }
+        else {
+            getProductos();
+        }
+        setTimeout(function() {
+            resultado.innerHTML = '';
+            }, 3000);
+    })
+    .catch(function(error){
+        console.log("Error en DELETE: " + error);
+    })
 }
