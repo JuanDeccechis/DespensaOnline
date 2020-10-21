@@ -17,171 +17,60 @@ function crearContenidoFactura() {
     formHTML.innerHTML = '';
 
     let campoId = document.createElement("input");
-    let campoFecha = document.createElement("input");
-    let campoDni = document.createElement("input");
-    //let campoProducto = document.createElement("select");
-     let campoEdad = document.createElement("input");
-    // let campoCiudad_residencia = document.createElement("input");
-
+    // let campoFecha = document.createElement("input");
+    // let campoCliente = document.createElement("input");
+    //  let campoProducto = document.createElement("input");
+    //campoId
     campoId.setAttribute('id', 'idFactura');
     campoId.setAttribute('value', '');
     campoId.setAttribute('placeHolder', 'id Factura');
     formHTML.appendChild(campoId);
     //agregar que esto sea readOnly y funcion que lea la fecha
-    campoFecha.setAttribute('id', 'Fecha');
-    campoFecha.setAttribute('value', '');
-    campoFecha.setAttribute('type', 'date');
-    formHTML.appendChild(campoFecha);
-     let labelDni = document.createElement("span");
-     labelDni.innerHTML = "DNI: ";
-    campoDni.setAttribute('id', 'dniCliente');
-    campoDni.setAttribute('value', '');
-    campoDni.setAttribute('type', 'number');
-    formHTML.appendChild(labelDni);
-     formHTML.appendChild(campoDni);
-    let labelApellido = document.createElement("span");
-    labelApellido.innerHTML = "Apellido: ";
-     campoEdad.setAttribute('id', 'ApellidoCliente');
-     campoEdad.setAttribute('value', '');
-     campoEdad.setAttribute('placeholder', 'apellido cliente');
-     formHTML.appendChild(labelApellido);
-     formHTML.appendChild(campoEdad);
-     let label = document.createElement("span");
+    //campoFecha
+    // campoFecha.setAttribute('id', 'Fecha');
+    // campoFecha.setAttribute('value', '');
+    // campoFecha.setAttribute('type', 'date');
+    // formHTML.appendChild(campoFecha);
+
+    //  campoCliente.setAttribute('id', '');
+    //  campoEdad.setAttribute('value', '');
+    //  campoEdad.setAttribute('placeholder', 'apellido cliente');
+    //  formHTML.appendChild(labelApellido);
+    //  formHTML.appendChild(campoEdad);
+    //  let label = document.createElement("span");
 
     // formHTML.appendChild(labelGenero);
     // formHTML.appendChild(campoGenero);
 
-    let botonPost = document.createElement("button");
-    botonPost.setAttribute('class', 'btn-primary');
-    botonPost.setAttribute('id', 'postEstudiante');
-    botonPost.addEventListener("click", addFactura);
-    botonPost.textContent = 'agregar estudiante';
-    formHTML.appendChild(botonPost);
+    // let botonPost = document.createElement("button");
+    // botonPost.setAttribute('class', 'btn-primary');
+    // botonPost.setAttribute('id', 'postEstudiante');
+    // botonPost.addEventListener("click", addFactura);
+    // botonPost.textContent = 'agregar estudiante';
+    // formHTML.appendChild(botonPost);
 
 
     let botonGet = document.createElement("button");
     botonGet.setAttribute('class', 'btn-primary');
     botonGet.setAttribute('id', 'getEstudiantes');
-    botonGet.addEventListener("click", getFactura);
-    botonGet.textContent = 'listar estudiantes';
+    botonGet.addEventListener("click", getFacturas);
+    botonGet.textContent = 'listar facturas';
     formHTML.appendChild(botonGet);
 
-    // let labelOrden = document.createElement("span");
-    // let campoOrdenBusqueda = document.createElement("select");
-    // labelOrden.innerHTML = "orden: ";
-    // campoOrdenBusqueda.setAttribute('id', 'ordenBusqueda');
-    // campoOrdenBusqueda.setAttribute('value', '');
-    // let optionASC = document.createElement("option");
-    // optionASC.text = "ASC";
-    // campoOrdenBusqueda.add(optionASC);
-    // let optionDESC = document.createElement("option");
-    // optionDESC.text = "DESC";
-    // campoOrdenBusqueda.add(optionDESC);
-    // formHTML.appendChild(labelOrden);
-    // formHTML.appendChild(campoOrdenBusqueda);
-    // let botonGetApellido = document.createElement("button");
-    // botonGetApellido.setAttribute('class', 'btn-primary');
-    // botonGetApellido.setAttribute('id', 'getEstudiantesApellido');
-    // botonGetApellido.addEventListener("click", getEstudiantesApellido);
-    // botonGetApellido.textContent = 'ordenar estudiantes por apellido';
-    // formHTML.appendChild(botonGetApellido);
+    let botonGetReporteVentasDia = document.createElement("button");
+  botonGetReporteVentasDia.setAttribute('class', 'btn-primary');
+  botonGetReporteVentasDia.setAttribute('id', 'getReporte');
+  botonGetReporteVentasDia.addEventListener("click", getReporteVentasDia);
+  botonGetReporteVentasDia.textContent = 'generar reporte ventas diarias';
+  formHTML.appendChild(botonGetReporteVentasDia);
 
-    // let campoLUBusqueda = document.createElement("input");
-    // let labelLU = document.createElement("span");
-    // labelLU.innerHTML = "LU: ";
-    // campoLUBusqueda.setAttribute('value', '');
-    // campoLUBusqueda.setAttribute('id', 'luEstudianteBusqueda');
-    // campoLUBusqueda.setAttribute('type', 'number');
-    // formHTML.appendChild(labelLU);
-    // formHTML.appendChild(campoLUBusqueda);
-    // let botonGetLU = document.createElement("button");
-    // botonGetLU.setAttribute('class', 'btn-primary');
-    // botonGetLU.setAttribute('id', 'getEstudianteLU');
-    // botonGetLU.addEventListener("click", getEstudianteLU);
-    // botonGetLU.textContent = 'un estudiante por LU';
-    // formHTML.appendChild(botonGetLU);
+;
 
-    // let campoGeneroBusqueda = document.createElement("select");
-    // let labelGeneroBusqueda = document.createElement("span");
-    // labelGeneroBusqueda.innerHTML = "Genero busqueda: ";
-    // campoGeneroBusqueda.setAttribute('id', 'generoEstudianteBusqueda');
-    // campoGeneroBusqueda.setAttribute('value', '');
-    // let optionFBusqueda = document.createElement("option");
-    // optionFBusqueda.text = "F";
-    // campoGeneroBusqueda.add(optionFBusqueda);
-    // let optionMBusqueda = document.createElement("option");
-    // optionMBusqueda.text = "M";
-    // campoGeneroBusqueda.add(optionMBusqueda);
-    // formHTML.appendChild(labelGeneroBusqueda);
-    // formHTML.appendChild(campoGeneroBusqueda);
-    // let botonGetGenero = document.createElement("button");
-    // botonGetGenero.setAttribute('class', 'btn-primary');
-    // botonGetGenero.setAttribute('id', 'getEstudianteGenero');
-    // botonGetGenero.addEventListener("click", getEstudianteGenero);
-    // botonGetGenero.textContent = 'estudiantes por genero';
-    // formHTML.appendChild(botonGetGenero);
-
-
-    // let campoCarrera_Busqueda = document.createElement("input");
-    // campoCarrera_Busqueda.setAttribute('id', 'carreraEstudianteBusqueda');
-    // campoCarrera_Busqueda.setAttribute('value', '');
-    // campoCarrera_Busqueda.setAttribute('placeHolder', 'carrera estudiante');
-    // formHTML.appendChild(campoCarrera_Busqueda);
-    // let campoCiudad_busqueda = document.createElement("input");
-    // campoCiudad_busqueda.setAttribute('id', 'ciudadEstudianteBusqueda');
-    // campoCiudad_busqueda.setAttribute('value', '');
-    // campoCiudad_busqueda.setAttribute('placeHolder', 'ciudad estudiante');
-    // formHTML.appendChild(campoCiudad_busqueda);
-
-    // let botonGetCarreraCiudad = document.createElement("button");
-    // botonGetCarreraCiudad.setAttribute('class', 'btn-primary');
-    // botonGetCarreraCiudad.setAttribute('id', 'getEstudianteCarreraCiudad');
-    // botonGetCarreraCiudad.addEventListener("click", getEstudiantesCarreraCiudad);
-    // botonGetCarreraCiudad.textContent = 'estudiantes de una carrera y ciudad';
-    // formHTML.appendChild(botonGetCarreraCiudad);
-
-    let colThead = document.createElement("thead");
-    let colTr = document.createElement("tr");
-    let colThLU = document.createElement("th");
-    let contenido = document.createTextNode("LU");
-    colThLU.appendChild(contenido);
-    colTr.appendChild(colThLU);
-
-    let colThNombre = document.createElement("th");
-    contenido = document.createTextNode("Nombre");
-    colThNombre.appendChild(contenido);
-    colTr.appendChild(colThNombre);
-
-    let colThApellido = document.createElement("th");
-    contenido = document.createTextNode("Apellido");
-    colThApellido.appendChild(contenido);
-    colTr.appendChild(colThApellido);
-
-    let colThEdad = document.createElement("th");
-    contenido = document.createTextNode("Edad");
-    colThEdad.appendChild(contenido);
-    colTr.appendChild(colThEdad);
-
-    let colThGenero = document.createElement("th");
-    contenido = document.createTextNode("Genero");
-    colThGenero.appendChild(contenido);
-    colTr.appendChild(colThGenero);
-
-    let colThDNI = document.createElement("th");
-    contenido = document.createTextNode("DNI");
-    colThDNI.appendChild(contenido);
-    colTr.appendChild(colThDNI);
-
-    let colThCiudad = document.createElement("th");
-    contenido = document.createTextNode("Ciudad");
-    colThCiudad.appendChild(contenido);
-    colTr.appendChild(colThCiudad);
-
-    colThead.appendChild(colTr);
-    let colTbody = document.createElement("tbody");
-    tableHTML.innerHTML = '';
-    tableHTML.appendChild(colThead);
-    tableHTML.appendChild(colTbody);
+    // colThead.appendChild(colTr);
+     let colTbody = document.createElement("tbody");
+    // tableHTML.innerHTML = '';
+    // tableHTML.appendChild(colThead);
+     tableHTML.appendChild(colTbody);
 }
 
 //crea el formulario y el thead de clientes
@@ -240,6 +129,13 @@ function crearContenidoClientes() {
     botonUpdate.addEventListener("click", updateCliente);
     botonUpdate.textContent = 'actualizar cliente';
     formHTML.appendChild(botonUpdate);
+    //getReporte
+    let botonGetReporte = document.createElement("button");
+    botonGetReporte.setAttribute('class', 'btn-primary');
+    botonGetReporte.setAttribute('id', 'getReporte');
+    botonGetReporte.addEventListener("click", getReporteTotalCliente);
+    botonGetReporte.textContent = 'generar reporte cliente';
+    formHTML.appendChild(botonGetReporte);
 
     let colThead = document.createElement("thead");
     let colTr = document.createElement("tr");
@@ -339,6 +235,13 @@ function crearContenidoProducto(){
     colThID.appendChild(contenido);
     colTr.appendChild(colThID);
 
+    let botonGetReporteProductoMasVendido= document.createElement("button");
+    botonGetReporteProductoMasVendido.setAttribute('class', 'btn-primary');
+    botonGetReporteProductoMasVendido.setAttribute('id', 'getReporte');
+    botonGetReporteProductoMasVendido.addEventListener("click", getReporteProductoMasVendido);
+    botonGetReporteProductoMasVendido.textContent = 'generar reporte producto mas vendido';
+    formHTML.appendChild(botonGetReporteProductoMasVendido);
+
     let colThNombre = document.createElement("th");
     contenido = document.createTextNode("NombreProducto");
     colThNombre.appendChild(contenido);
@@ -368,135 +271,105 @@ function crearContenidoProducto(){
     tableHTML.appendChild(colTbody);
 }
 
-/*crea el formulario y el thead de matriculas
-function crearContenidoRelaciones() {
-    formHTML.innerHTML = '';
-
-    let campoLUMatricula = document.createElement("input");
-    let labelLUMatricula = document.createElement("span");
-    labelLUMatricula.innerHTML = "LU: ";
-    campoLUMatricula.setAttribute('id', 'LUMatricula');
-    campoLUMatricula.setAttribute('value', '');
-    campoLUMatricula.setAttribute('type', 'number');
-    formHTML.appendChild(labelLUMatricula);
-    formHTML.appendChild(campoLUMatricula);
-    let campoIDCarreraMatricula = document.createElement("input");
-    let labelIDCarreraMatricula = document.createElement("span");
-    labelIDCarreraMatricula.innerHTML = "id carrera: ";
-    campoIDCarreraMatricula.setAttribute('id', 'idCarreraMatricula');
-    campoIDCarreraMatricula.setAttribute('value', '');
-    campoIDCarreraMatricula.setAttribute('type', 'number');
-    formHTML.appendChild(labelIDCarreraMatricula);
-    formHTML.appendChild(campoIDCarreraMatricula);
-    let campoFechaIngresoMatricula = document.createElement("input");
-    let labelFechaIngresoMatricula = document.createElement("span");
-    labelFechaIngresoMatricula.innerHTML = "fecha ingreso: ";
-    campoFechaIngresoMatricula.setAttribute('id', 'fechaIngresoMatricula');
-    campoFechaIngresoMatricula.setAttribute('value', '');
-    campoFechaIngresoMatricula.setAttribute('type', 'date');
-    formHTML.appendChild(labelFechaIngresoMatricula);
-    formHTML.appendChild(campoFechaIngresoMatricula);
-    let campoFechaEgresoMatricula = document.createElement("input");
-    let labelFechaEgresoMatricula = document.createElement("span");
-    labelFechaEgresoMatricula.innerHTML = "fecha egreso: ";
-    campoFechaEgresoMatricula.setAttribute('id', 'fechaEgresoMatricula');
-    campoFechaEgresoMatricula.setAttribute('value', '');
-    campoFechaEgresoMatricula.setAttribute('type', 'date');
-    formHTML.appendChild(labelFechaEgresoMatricula);
-    formHTML.appendChild(campoFechaEgresoMatricula);
-
-    let botonPost = document.createElement("button");
-    botonPost.setAttribute('class', 'btn-primary');
-    botonPost.setAttribute('id', 'postMatricula');
-    botonPost.addEventListener("click", addMatricula);
-    botonPost.textContent = 'agregar matricula';
-    formHTML.appendChild(botonPost);
-
-    let botonGet = document.createElement("button");
-    botonGet.setAttribute('class', 'btn-primary');
-    botonGet.setAttribute('id', 'getMatriculas');
-    botonGet.addEventListener("click", getMatriculas);
-    botonGet.textContent = 'listar matriculas';
-    formHTML.appendChild(botonGet);
-
-    let botonGetReporte = document.createElement("button");
-    botonGetReporte.setAttribute('class', 'btn-primary');
-    botonGetReporte.setAttribute('id', 'getReporte');
-    botonGetReporte.addEventListener("click", getReporte);
-    botonGetReporte.textContent = 'generar reporte';
-    formHTML.appendChild(botonGetReporte);
-
+function crearContenidoRelacionesReporteTotalCliente() {
     let colThead = document.createElement("thead");
     let colTr = document.createElement("tr");
-    let colThCarreraMatricula = document.createElement("th");
-    let contenido = document.createTextNode("carrera");
-    colThCarreraMatricula.appendChild(contenido);
-    colTr.appendChild(colThCarreraMatricula);
-
-    let colThLUEstudianteMatricula = document.createElement("th");
-    contenido = document.createTextNode("LU estudiante");
-    colThLUEstudianteMatricula.appendChild(contenido);
-    colTr.appendChild(colThLUEstudianteMatricula);
-
-    let colThApellidoEstudianteMatricula = document.createElement("th");
-    contenido = document.createTextNode("apellido estudiante");
-    colThApellidoEstudianteMatricula.appendChild(contenido);
-    colTr.appendChild(colThApellidoEstudianteMatricula);
-
-    let colThIngreso = document.createElement("th");
-    contenido = document.createTextNode("ingreso");
-    colThIngreso.appendChild(contenido);
-    colTr.appendChild(colThIngreso);
-
-    let colThEgreso = document.createElement("th");
-    contenido = document.createTextNode("egreso");
-    colThEgreso.appendChild(contenido);
-    colTr.appendChild(colThEgreso);
-
-    let colThGraduado = document.createElement("th");
-    contenido = document.createTextNode("graduado");
-    colThGraduado.appendChild(contenido);
-    colTr.appendChild(colThGraduado);
-
+  
+    let colThId = document.createElement("th");
+    let contenido = document.createTextNode("ID");
+    colThId.appendChild(contenido);
+    colTr.appendChild(colThId);
+  
+    let colThNombre = document.createElement("th");
+    contenido = document.createTextNode("Nombre");
+    colThNombre.appendChild(contenido);
+    colTr.appendChild(colThNombre);
+  
+    let colThApellido = document.createElement("th");
+    contenido = document.createTextNode("Apellido");
+    colThApellido.appendChild(contenido);
+    colTr.appendChild(colThApellido);
+  
+    let colThDni= document.createElement("th");
+    contenido = document.createTextNode("DNI");
+    colThDni.appendChild(contenido);
+    colTr.appendChild(colThDni);
+  
+    let colThInCantidad = document.createElement("th");
+    contenido = document.createTextNode("Total");
+    colThInCantidad.appendChild(contenido);
+    colTr.appendChild(colThInCantidad);
+  
     colThead.appendChild(colTr);
     let colTbody = document.createElement("tbody");
     tableHTML.innerHTML = '';
     tableHTML.appendChild(colThead);
     tableHTML.appendChild(colTbody);
-}
-*/
-/*
-function crearContenidoRelacionesReporte() {
+  }
+
+  function crearContenidoRelacionesReporteProductoMasVendido() {
     let colThead = document.createElement("thead");
     let colTr = document.createElement("tr");
-    let colThCarreraMatricula = document.createElement("th");
-    let contenido = document.createTextNode("Carrera");
-    colThCarreraMatricula.appendChild(contenido);
-    colTr.appendChild(colThCarreraMatricula);
+    let colThID = document.createElement("th");
+    let contenido = document.createTextNode("ID");
+    colThID.appendChild(contenido);
+    colTr.appendChild(colThID);
+  
+    let colThNombre = document.createElement("th");
+    contenido = document.createTextNode("NombreProducto");
+    colThNombre.appendChild(contenido);
+    colTr.appendChild(colThNombre);
+  
+    let colThDescr = document.createElement("th");
+    contenido = document.createTextNode("Descripcion");
+    colThDescr.appendChild(contenido);
+    colTr.appendChild(colThDescr);
+  
+    let colThCant = document.createElement("th");
+    contenido = document.createTextNode("Stock");
+    colThCant.appendChild(contenido);
+    colTr.appendChild(colThCant);
+    colThead.appendChild(colTr);
+  
+    let colThPrecio = document.createElement("th");
+    contenido = document.createTextNode("Precio");
+    colThPrecio.appendChild(contenido);
+    colTr.appendChild(colThPrecio);
+    colThead.appendChild(colTr);
+  
+    let colThVendido = document.createElement("th");
+    contenido = document.createTextNode("Cant Ventas");
+    colThVendido.appendChild(contenido);
+    colTr.appendChild(colThVendido);
+    colThead.appendChild(colTr);
+  
+    let colTbody = document.createElement("tbody");
+    colTbody.setAttribute("id", "tbody");
+    tableHTML.innerHTML = '';
+    tableHTML.appendChild(colThead);
+    tableHTML.appendChild(colTbody);
+  }
 
-    let colThLUEstudianteMatricula = document.createElement("th");
-    contenido = document.createTextNode("Cantidad Inscriptos");
-    colThLUEstudianteMatricula.appendChild(contenido);
-    colTr.appendChild(colThLUEstudianteMatricula);
-
-    let colThApellidoEstudianteMatricula = document.createElement("th");
-    contenido = document.createTextNode("Cantidad Egresados");
-    colThApellidoEstudianteMatricula.appendChild(contenido);
-    colTr.appendChild(colThApellidoEstudianteMatricula);
-
-    let colThIngreso = document.createElement("th");
-    contenido = document.createTextNode("Año");
-    colThIngreso.appendChild(contenido);
-    colTr.appendChild(colThIngreso);
-
+  function crearContenidoRelacionesReporteVentasDia() {
+    let colThead = document.createElement("thead");
+    let colTr = document.createElement("tr");
+  
+    let colThFecha = document.createElement("th");
+    let contenido = document.createTextNode("Fecha");
+    colThFecha.appendChild(contenido);
+    colTr.appendChild(colThFecha);
+  
+    let colThTotal = document.createElement("th");
+    contenido = document.createTextNode("Total");
+    colThTotal.appendChild(contenido);
+    colTr.appendChild(colThTotal);
+  
     colThead.appendChild(colTr);
     let colTbody = document.createElement("tbody");
     tableHTML.innerHTML = '';
     tableHTML.appendChild(colThead);
     tableHTML.appendChild(colTbody);
-}
-*/
-
+  }
 
 
 //pedido REST para obtener los clientes
@@ -510,17 +383,44 @@ function getClientes() {
     })
 }
 
-// //2F pedido REST para obtener las carreras ordenadas por cantidad de estudiantes inscriptos
-// function getCarrerasOrdenEstudiantes() {
-//     let url = baseUrl + "rest/carreras/orden/cantincriptos";
-//     fetch(url)
-//     .then(res => res.json())
-//     .then(datos => {
-//         setTablaCarreras(datos)
-//     })
-// }
+function getFacturas() {
+    let url = baseUrl + "facturas/";
+    fetch(url)
+    .then(res => res.json())
+    .then(datos => {
+        console.log(datos);
+        setTablaFacturas(datos)
+    })
+}
 
-//pedido REST para obtener los estudiantes
+function getReporteTotalCliente() {
+    crearContenidoRelacionesReporteTotalCliente()
+    let url = baseUrl + "facturas/reporteClientes/";
+    fetch(url)
+    .then(res => res.json())
+    .then(datos => {
+        setTablaMatriculasReporteClientesTotal(datos)
+    })
+}
+function getReporteProductoMasVendido() {
+    crearContenidoRelacionesReporteProductoMasVendido()
+    let url = baseUrl + "facturas/productoMasVendido/";
+    fetch(url)
+    .then(res => res.json())
+    .then(datos => {
+      setTablaMatriculasReporteProductoMasVendido(datos)
+    })
+  }
+  function getReporteVentasDia() {
+    crearContenidoRelacionesReporteVentasDia()
+    let url = baseUrl + "facturas/reporteVentasDia/";
+    fetch(url)
+    .then(res => res.json())
+    .then(datos => {
+      setTablaMatriculasReporteVentasDia(datos)
+    })
+  }
+//pedido REST para obtener los productos
 function getProductos() {
     let url = baseUrl + "productos/";
     fetch(url)
@@ -530,76 +430,7 @@ function getProductos() {
         setTablaProductos(datos)
     })
 }
-/*
-//pedido REST para obtener las carreras y estudiantes relacionados
-function getMatriculas() {
-  crearContenidoRelaciones()
-    let url = baseUrl + "rest/matriculas";
-    fetch(url)
-    .then(res => res.json())
-    .then(datos => {
-        setTablaMatriculas(datos)
-    })
-}
 
-//2H pedido REST para obtener el reporte de carreras (inscriptos y egresados por año)
-function getReporte() {
-    crearContenidoRelacionesReporte()
-    let url = baseUrl + "rest/matriculas/reporte";
-    fetch(url)
-    .then(res => res.json())
-    .then(datos => {
-        setTablaMatriculasReporte(datos)
-    })
-}
-
-//2C pedido REST para obtener los estudiantes ordenados por apellido (ASC o DESC)
-function getEstudiantesApellido() {
-    let orden = document.querySelector("#ordenBusqueda").value;
-    let url = baseUrl + "rest/estudiantes/orden/" + orden;
-    fetch(url)
-    .then(res => res.json())
-    .then(datos => {
-        setTablaEstudiantes(datos)
-    })
-}
-
-//2D pedido REST para obtener un estudiante (dada su LU)
-function getEstudianteLU() {
-    let LU = document.querySelector("#luEstudianteBusqueda").value;
-    let url = baseUrl + "rest/estudiantes/" + LU;
-    fetch(url)
-    .then(res => res.json())
-    .then(datos => {
-        let arrDatos = [];
-        arrDatos.push(datos);
-        setTablaEstudiantes(arrDatos)
-    })
-}
-
-//2E pedido REST para obtener los estudiantes de determinado genero
-function getEstudianteGenero() {
-    let generoBusqueda = document.querySelector("#generoEstudianteBusqueda").value;
-    let url = baseUrl + "rest/estudiantes/genero/" + generoBusqueda;
-    fetch(url)
-    .then(res => res.json())
-    .then(datos => {
-        setTablaEstudiantes(datos)
-    })
-}
-
-//2G pedido REST para obtener los estudiantes de una carrera y ciudad
-function getEstudiantesCarreraCiudad() {
-    let carreraBusqueda = document.querySelector("#carreraEstudianteBusqueda").value;
-    let ciudadBusqueda = document.querySelector("#ciudadEstudianteBusqueda").value;
-    let url = baseUrl + "rest/estudiantes/carrera/" + carreraBusqueda + "/ciudad/" + ciudadBusqueda;
-    fetch(url)
-    .then(res => res.json())
-    .then(datos => {
-        setTablaEstudiantes(datos)
-    })
-}
-*/
 //pedido REST para agregar una carrera (campos: nombre)
 function addCliente() {
     let idCliente = document.querySelector("#idCliente").value;
@@ -757,110 +588,51 @@ function setTablaClientes(datos) {
     }
 }
 
-/*incorpora el resultado de la consulta a una tabla de matriculas
-function setTablaMatriculas(datos) {
+function setTablaFacturas(datos){
     let colTr;
-    let colTdCarreraMatricula;
-    let contenidoCarreraMatricula;
-    let colTdLUEstudianteMatricula;
-    let contenidoLUEstudianteMatricula;
-    let colTdApellidoEstudianteMatricula;
-    let contenidoApellidoEstudianteMatricula;
-    let colTdIngresoMatricula;
-    let contenidoIngresoMatricula;
-    let colTdEgresoMatricula;
-    let contenidoEgresoMatricula;
-    let colTdGraduadoMatricula;
-    let contenidoGraduadoMatricula;
-    let tbody = document.querySelector("tbody");
-    tbody.innerHTML = "";
+    let colTdId;
+    let contenidoId;
+    let colTdFecha;
+    let contenidoFecha;
 
+    let colTdCliente;
+    let contenidoCliente;
+    let colTdProductos;
+    let contenidoProductos;
+    let tbody = document.querySelector("tbody");
+    console.log(tbody);
+    tbody.innerHTML = "";
     for (let index = 0; index < datos.length; index++) {
         colTr = document.createElement("tr");
-        colTdCarreraMatricula = document.createElement("td");
-        contenidoCarreraMatricula = document.createTextNode(datos[index].carrera.nombre_carrera);
-        colTdCarreraMatricula.appendChild(contenidoCarreraMatricula);
-        colTr.appendChild(colTdCarreraMatricula);
-        colTdLUEstudianteMatricula = document.createElement("td");
-        contenidoLUEstudianteMatricula = document.createTextNode(datos[index].estudiante.lu);
-        colTdLUEstudianteMatricula.appendChild(contenidoLUEstudianteMatricula);
-        colTr.appendChild(colTdLUEstudianteMatricula);
-        colTdApellidoEstudianteMatricula = document.createElement("td");
-        contenidoApellidoEstudianteMatricula = document.createTextNode(datos[index].estudiante.apellido);
-        colTdApellidoEstudianteMatricula.appendChild(contenidoApellidoEstudianteMatricula);
-        colTr.appendChild(colTdApellidoEstudianteMatricula);
-        colTdIngresoMatricula = document.createElement("td");
-        contenidoIngresoMatricula = document.createTextNode(datos[index].fecha_inscripcion);
-        colTdIngresoMatricula.appendChild(contenidoIngresoMatricula);
-        colTr.appendChild(colTdIngresoMatricula);
-        colTdEgresoMatricula = document.createElement("td");
-        if (datos[index].fecha_egreso == null){
-          contenidoEgresoMatricula = document.createTextNode("-");
-          colTdEgresoMatricula.appendChild(contenidoEgresoMatricula);
-          colTr.appendChild(colTdEgresoMatricula);
-        } else {
-          contenidoEgresoMatricula = document.createTextNode(datos[index].fecha_egreso);
-          colTdEgresoMatricula.appendChild(contenidoEgresoMatricula);
-          colTr.appendChild(colTdEgresoMatricula);
-        }
+        colTdId = document.createElement("td");
+        contenidoId = document.createTextNode(datos[index].id);
+        colTdId.appendChild(contenidoId);
+        colTr.appendChild(colTdId);
+        colTdFecha = document.createElement("td");
+        contenidoFecha = document.createTextNode(datos[index].fecha);
+        colTdFecha.appendChild(contenidoFecha);
+        colTr.appendChild(colTdFecha);
 
-        colTdGraduadoMatricula = document.createElement("td");
-        if (datos[index].graduado) {
-            contenidoGraduadoMatricula = document.createTextNode("SI");
-        }
-        else {
-            contenidoGraduadoMatricula = document.createTextNode("NO");
-        }
 
-        colTdGraduadoMatricula.appendChild(contenidoGraduadoMatricula);
-        colTr.appendChild(colTdGraduadoMatricula);
+        colTdCliente = document.createElement("td");
+        contenidoCliente = document.createTextNode(datos[index].cliente.nombre);
+        colTdCliente.appendChild(contenidoCliente);
+        colTr.appendChild(colTdCliente);
+        colTdProductos = document.createElement("td");
+        let prod="";
+         for (let j = 0; j < datos[index].productos.length; j++) {
+            prod+=j+" producto:"+datos[index].productos[j].nombre;
+             
+          }
+          contenidoProductos = document.createTextNode(prod);
+        colTdProductos.appendChild(contenidoProductos);
+         colTr.appendChild(colTdProductos);
+
+
         tbody.appendChild(colTr);
     }
+
 }
-
-
-//incorpora el resultado de la consulta a una tabla de reporte en matricula
-function setTablaMatriculasReporte(datos) {
-    let colTr;
-    let colTdCarreraMatricula;
-    let contenidoCarreraMatricula;
-    let colTdLUEstudianteMatricula;
-    let contenidoLUEstudianteMatricula;
-    let colTdApellidoEstudianteMatricula;
-    let contenidoApellidoEstudianteMatricula;
-    let colTdIngresoMatricula;
-    let contenidoIngresoMatricula;
-    let colTdEgresoMatricula;
-    let contenidoEgresoMatricula;
-    let colTdGraduadoMatricula;
-    let contenidoGraduadoMatricula;
-    let tbody = document.querySelector("tbody");
-    tbody.innerHTML = "";
-
-    for (let index = 0; index < datos.length; index++) {
-        colTr = document.createElement("tr");
-        colTdCarreraMatricula = document.createElement("td");
-        console.log(datos[index].nombreCarrera);
-        contenidoCarreraMatricula = document.createTextNode(datos[index].nombreCarrera);
-        colTdCarreraMatricula.appendChild(contenidoCarreraMatricula);
-        colTr.appendChild(colTdCarreraMatricula);
-        colTdLUEstudianteMatricula = document.createElement("td");
-        contenidoLUEstudianteMatricula = document.createTextNode(datos[index].cantInscriptos);
-        colTdLUEstudianteMatricula.appendChild(contenidoLUEstudianteMatricula);
-        colTr.appendChild(colTdLUEstudianteMatricula);
-        colTdApellidoEstudianteMatricula = document.createElement("td");
-        contenidoApellidoEstudianteMatricula = document.createTextNode(datos[index].cantEgresados);
-        colTdApellidoEstudianteMatricula.appendChild(contenidoApellidoEstudianteMatricula);
-        colTr.appendChild(colTdApellidoEstudianteMatricula);
-        colTdIngresoMatricula = document.createElement("td");
-        contenidoIngresoMatricula = document.createTextNode(datos[index].anio);
-        colTdIngresoMatricula.appendChild(contenidoIngresoMatricula);
-        colTr.appendChild(colTdIngresoMatricula);
-        tbody.appendChild(colTr);
-    }
-}
-
-*/
 function setTablaProductos(datos) {
     let colTr;
     let colTdId;
@@ -905,7 +677,129 @@ function setTablaProductos(datos) {
     }
 }
 
+function setTablaMatriculasReporteClientesTotal(datos) {
+    let colTr;
+    let colTdIDClienteReporte;
+    let contenidoIDClienteReporte;
+    let colTdNombreClientereporte;
+    let contenidoNombreClienteReporte;
+    let colTdApellidoClientereporte;
+    let contenidoApellidoClienteReporte;
+    let colTdDNIClienteReporte;
+    let contenidoDNIClienteReporte;
+    let colThInCantidad;
+    let contenidoTotal;
+    let tbody = document.querySelector("tbody");
+    tbody.innerHTML = "";
 
+    for (let index = 0; index < datos.length; index++) {
+        colTr = document.createElement("tr");
+
+        colTdIDClienteReporte = document.createElement("td");
+        contenidoIDClienteReporte = document.createTextNode(datos[index].id);
+        colTdIDClienteReporte.appendChild(contenidoIDClienteReporte);
+        colTr.appendChild(colTdIDClienteReporte);
+
+        colTdNombreClientereporte = document.createElement("td");
+        contenidoNombreClienteReporte = document.createTextNode(datos[index].nombre);
+        colTdNombreClientereporte.appendChild(contenidoNombreClienteReporte);
+        colTr.appendChild(colTdNombreClientereporte);
+
+        colTdApellidoClientereporte = document.createElement("td");
+        contenidoApellidoClienteReporte= document.createTextNode(datos[index].apellido);
+        colTdApellidoClientereporte.appendChild(contenidoApellidoClienteReporte);
+        colTr.appendChild(colTdApellidoClientereporte);
+
+        colTdDNIClienteReporte= document.createElement("td");
+        contenidoDNIClienteReporte = document.createTextNode(datos[index].dni);
+        colTdDNIClienteReporte.appendChild(contenidoDNIClienteReporte);
+        colTr.appendChild(colTdDNIClienteReporte);
+
+        colThInCantidad = document.createElement("td");
+        contenidoTotal = document.createTextNode("$"+datos[index].total);
+        colThInCantidad.appendChild(contenidoTotal);
+        colTr.appendChild(colThInCantidad);
+
+        tbody.appendChild(colTr);
+    }
+}
+function setTablaMatriculasReporteProductoMasVendido(datos) {
+    let colTr;
+    let colTdId;
+    let contenidoId;
+    let colTdNombre;
+    let contenidoNombre;
+  
+    let colTdDescr;
+    let contenidoDescr;
+    let colTdcantidad;
+    let contenidoCantidad;
+    let colTdPrecio;
+    let colTdVentas
+    let contenidoVentas
+    let contenidoPrecio;
+    let tbody = document.querySelector("tbody");
+    tbody.innerHTML = "";
+    for (let index = 0; index < datos.length; index++) {
+      colTr = document.createElement("tr");
+      colTdId = document.createElement("td");
+      contenidoId = document.createTextNode(datos[index].id);
+      colTdId.appendChild(contenidoId);
+      colTr.appendChild(colTdId);
+      colTdNombre = document.createElement("td");
+      contenidoNombre = document.createTextNode(datos[index].nombre);
+      colTdNombre.appendChild(contenidoNombre);
+      colTr.appendChild(colTdNombre);
+  
+  
+      colTdDescr = document.createElement("td");
+      contenidoDescr = document.createTextNode(datos[index].descripcion);
+      colTdDescr.appendChild(contenidoDescr);
+      colTr.appendChild(colTdDescr);
+  
+      colTdcantidad = document.createElement("td");
+      contenidoCantidad = document.createTextNode(datos[index].stock);
+      colTdcantidad.appendChild(contenidoCantidad);
+      colTr.appendChild(colTdcantidad);
+  
+      colTdPrecio = document.createElement("td");
+      contenidoPrecio = document.createTextNode(datos[index].precio);
+      colTdPrecio.appendChild(contenidoPrecio);
+      colTr.appendChild(colTdPrecio);
+  
+      colTdVentas = document.createElement("td");
+      contenidoVentas = document.createTextNode(datos[index].cantidad);
+      colTdVentas.appendChild(contenidoVentas);
+      colTr.appendChild(colTdVentas);
+  
+      tbody.appendChild(colTr);
+    }
+  }
+  function setTablaMatriculasReporteVentasDia(datos) {
+    let colTr;
+    let colTdFecha;
+    let contenidoFecha;
+    let colTdTotal;
+    let contenidoTotal;
+    let tbody = document.querySelector("tbody");
+    tbody.innerHTML = "";
+  
+    for (let index = 0; index < datos.length; index++) {
+      colTr = document.createElement("tr");
+  
+      colTdFecha= document.createElement("td");
+      contenidoFecha = document.createTextNode(datos[index].fecha);
+      colTdFecha.appendChild(contenidoFecha);
+      colTr.appendChild(colTdFecha);
+  
+      colTdTotal = document.createElement("td");
+      contenidoTotal = document.createTextNode(datos[index].total);
+      colTdTotal.appendChild(contenidoTotal);
+      colTr.appendChild(colTdTotal);
+  
+      tbody.appendChild(colTr);
+    }
+  }
 function deleteCliente() {
     let idCliente = document.querySelector("#idCliente").value;
     console.log(idCliente);
