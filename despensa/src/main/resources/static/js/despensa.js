@@ -17,37 +17,45 @@ function crearContenidoFactura() {
     formHTML.innerHTML = '';
 
     let campoId = document.createElement("input");
-    // let campoFecha = document.createElement("input");
-    // let campoCliente = document.createElement("input");
-    //  let campoProducto = document.createElement("input");
+     let campoFecha = document.createElement("input");
+     let campoCliente = document.createElement("input");
+     let campoProducto1 = document.createElement("input");
+     let campoProducto2 = document.createElement("input");
+     let campoProducto3 = document.createElement("input");
     //campoId
     campoId.setAttribute('id', 'idFactura');
     campoId.setAttribute('value', '');
     campoId.setAttribute('placeHolder', 'id Factura');
     formHTML.appendChild(campoId);
-    //agregar que esto sea readOnly y funcion que lea la fecha
     //campoFecha
-    // campoFecha.setAttribute('id', 'Fecha');
-    // campoFecha.setAttribute('value', '');
-    // campoFecha.setAttribute('type', 'date');
-    // formHTML.appendChild(campoFecha);
+    campoFecha.setAttribute('id', 'Fecha');
+    campoFecha.setAttribute('value', '');
+    campoFecha.setAttribute('type', 'date');
+    formHTML.appendChild(campoFecha);
 
-    //  campoCliente.setAttribute('id', '');
-    //  campoEdad.setAttribute('value', '');
-    //  campoEdad.setAttribute('placeholder', 'apellido cliente');
-    //  formHTML.appendChild(labelApellido);
-    //  formHTML.appendChild(campoEdad);
-    //  let label = document.createElement("span");
+     campoCliente.setAttribute('id', 'idCliente');
+     campoCliente.setAttribute('value', '');
+     campoCliente.setAttribute('placeholder', 'id cliente');
+    formHTML.appendChild(campoCliente);
+    campoProducto1.setAttribute('id', 'idProducto1');
+     campoProducto1.setAttribute('value', '');
+     campoProducto1.setAttribute('placeholder', 'id producto 1');
+    formHTML.appendChild(campoProducto1);
+    campoProducto2.setAttribute('id', 'idProducto1');
+    campoProducto2.setAttribute('value', '');
+    campoProducto2.setAttribute('placeholder', 'id producto 2');
+    formHTML.appendChild(campoProducto2);
+    campoProducto3.setAttribute('id', 'idProducto1');
+    campoProducto3.setAttribute('value', '');
+    campoProducto3.setAttribute('placeholder', 'id producto 3');
+    formHTML.appendChild(campoProducto3);
 
-    // formHTML.appendChild(labelGenero);
-    // formHTML.appendChild(campoGenero);
-
-    // let botonPost = document.createElement("button");
-    // botonPost.setAttribute('class', 'btn-primary');
-    // botonPost.setAttribute('id', 'postEstudiante');
-    // botonPost.addEventListener("click", addFactura);
-    // botonPost.textContent = 'agregar estudiante';
-    // formHTML.appendChild(botonPost);
+    let botonPost = document.createElement("button");
+    botonPost.setAttribute('class', 'btn-primary');
+    botonPost.setAttribute('id', 'postEstudiante');
+   // botonPost.addEventListener("click", addFactura);
+    botonPost.textContent = 'agregar estudiante';
+    formHTML.appendChild(botonPost);
 
 
     let botonGet = document.createElement("button");
@@ -56,6 +64,13 @@ function crearContenidoFactura() {
     botonGet.addEventListener("click", getFacturas);
     botonGet.textContent = 'listar facturas';
     formHTML.appendChild(botonGet);
+
+    let botonDelete = document.createElement("button");
+    botonDelete.setAttribute('class', 'btn-danger');
+    botonDelete.setAttribute('id', 'deleteFactura');
+    botonDelete.addEventListener("click", deleteFactura);
+    botonDelete.textContent = 'borrar factura por ID';
+    formHTML.appendChild(botonDelete);
 
     let botonGetReporteVentasDia = document.createElement("button");
   botonGetReporteVentasDia.setAttribute('class', 'btn-primary');
@@ -921,6 +936,34 @@ function deleteProducto() {
         }
         else {
             getProductos();
+        }
+        setTimeout(function() {
+            resultado.innerHTML = '';
+            }, 3000);
+    })
+    .catch(function(error){
+        console.log("Error en DELETE: " + error);
+    })
+}
+
+function deleteFactura() {
+    let idFactura = document.querySelector("#idFactura").value;
+    console.log(idFactura);
+    let url = baseUrl + "facturas/" + idFactura;
+    fetch(url, {
+        "method": 'DELETE',
+        "headers": {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(function(r){
+        let resultado = document.querySelector("#resultado");
+        resultado.innerHTML = "DELETE Cliente status: " + r.status;
+        if (r.status === 204) {
+            resultado.innerHTML += " No existia una factura  con ese id";
+        }
+        else {
+            getFacturas();
         }
         setTimeout(function() {
             resultado.innerHTML = '';
