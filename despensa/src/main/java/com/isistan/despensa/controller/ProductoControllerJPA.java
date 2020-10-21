@@ -1,30 +1,37 @@
 package com.isistan.despensa.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.isistan.despensa.model.Cliente;
 import com.isistan.despensa.model.Producto;
-import com.isistan.despensa.repository.ClienteRepository;
 import com.isistan.despensa.repository.ProductoRepository;
 
+
+
+/**
+ * @author Belen Enemark
+ * @author Juan Deccechis
+ * @author Mateo Zarrabeitia
+ * Esta clase se ocupa  de manejar los servicios rest de la clase Producto*/
 @RestController
 @RequestMapping("productos")
 public class ProductoControllerJPA {
-
+	
 	@Qualifier("productoRepository")
 	@Autowired
 	private final ProductoRepository repository;
 
+	/** Constructor que crea el Repository, y carga los productos con el LoadData*/
 	public ProductoControllerJPA(@Qualifier("productoRepository") ProductoRepository repository) {
 		this.repository = null;
 	}
-
+	
+	
+	/** Obtener todos los productos
+	 * @return retorna un Iterable<Producto> con todos los productos*/
 	@GetMapping("/") 
 	@CrossOrigin
 	public ResponseEntity<Iterable<Producto>> getProductos() { 
@@ -39,6 +46,10 @@ public class ProductoControllerJPA {
 		}
 	}
 
+	/** Inserta un producto en la base de datos 
+	 * @param producto objeto Producto con sus elementos para persistir
+     * @return retorna el objeto creado, o en caso contrario retorna null con el status request
+	 */
 	@PostMapping("/")
 	@CrossOrigin
 	public ResponseEntity<Producto> newProducto(@RequestBody Producto p) { 
@@ -53,7 +64,11 @@ public class ProductoControllerJPA {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	
+	/** Elimina un producto de la base de datos
+	 * @param identificador del producto a borrar (id Integer)
+	 * @return retorna un String(mensaje) si el producto fue eliminado o si no se pudo eliminar con el status request
+	 * */
 	@DeleteMapping("/{id}")
 	@CrossOrigin
 	public  ResponseEntity<String> dropProducto(@PathVariable Integer id) { 
@@ -65,6 +80,10 @@ public class ProductoControllerJPA {
 		}
 	}
 
+	/** Actualiza un producto de la base de datos
+	 * @param identificador del producto a borrar (id Integer)
+	 * @return retorna el objeto modificado, en caso contrario retorna un status request
+	 * */
 	@PutMapping("/{id}")
 	@CrossOrigin
 	public ResponseEntity<Producto> updateProducto(@RequestBody Producto p, @PathVariable Integer id) { 
