@@ -37,11 +37,11 @@ public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 			nativeQuery = true)
 	List<DTOFacturaClienteReporte> getReporteCliente();
 	
-	@Query( value = "select f.fecha, sum(p.precio) as total from cliente c\r\n"
+	@Query( value = "select CAST(f.fecha AS DATE) as fecha, sum(p.precio) as total from cliente c\r\n"
 			+ "join factura f ON f.cliente_id = c.id\r\n"
 			+ "join factura_productos fp ON f.id = fp.factura_id\r\n"
 			+ "join producto p ON p.id = fp.productos_id\r\n"
-			+ "GROUP by f.fecha", 
+			+ "GROUP BY CAST(f.fecha AS DATE)", 
 			nativeQuery = true)
 	List<DTOReporteVentasDia> getReporteVentasPorDia();
 	
