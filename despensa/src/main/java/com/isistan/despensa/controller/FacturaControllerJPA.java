@@ -1,12 +1,11 @@
 package com.isistan.despensa.controller;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.isistan.despensa.dto.DTOFacturaClienteReporte;
 import com.isistan.despensa.dto.DTOProductoMasVendido;
 import com.isistan.despensa.dto.DTOReporteVentasDia;
+import com.isistan.despensa.model.Cliente;
 import com.isistan.despensa.model.Factura;
 import com.isistan.despensa.repository.FacturaRepository;
 
@@ -39,52 +39,101 @@ public class FacturaControllerJPA {
 
 	@GetMapping("/") 
 	@CrossOrigin
-	public Iterable<Factura> getFacturas() { 
-		return repository.findAll();
+	public ResponseEntity<Iterable<Factura>> getFacturas() { 
+		try {
+			List<Factura> facturas = repository.findAll();
+			if (facturas.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(facturas, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	
+
 	@GetMapping("/reporteClientes") 
 	@CrossOrigin
-	public Iterable<DTOFacturaClienteReporte> getReporteComprasClientes() { 
-		return repository.getReporteCliente();
+	public ResponseEntity<Iterable<DTOFacturaClienteReporte>> getReporteComprasClientes() { 
+		try {
+			List<DTOFacturaClienteReporte> facturas = repository.getReporteCliente();
+			if (facturas.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(facturas, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	
+
 	@GetMapping("/reporteVentasDia") 
 	@CrossOrigin
-	public Iterable<DTOReporteVentasDia> getReporteVentasDia() { 
-		return repository.getReporteVentasPorDia();
+	public ResponseEntity<Iterable<DTOReporteVentasDia>> getReporteVentasDia() { 
+		try {
+			List<DTOReporteVentasDia> facturas = repository.getReporteVentasPorDia();
+			if (facturas.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(facturas, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping("/productoMasVendido") 
 	@CrossOrigin
-	public Iterable<DTOProductoMasVendido> getProductoMasVendido() { 
-		return repository.getProductoMasVendido();
+	public ResponseEntity<Iterable<DTOProductoMasVendido>> getProductoMasVendido() { 
+		try {
+			List<DTOProductoMasVendido> facturas = repository.getProductoMasVendido();
+			if (facturas.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(facturas, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@PostMapping("/")
 	@CrossOrigin
-	public Factura newFactura(@RequestBody Factura f) {
-		Integer cantCompras = repository.getComprasDiaPorUsuario(f.getCliente().getId(), f.getFecha());
-		if(cantCompras == null) {
-			return repository.save(f);
-		} else if(cantCompras < 3 && cantCompras+f.getProductos().size() <=3) {
-			System.out.println(cantCompras+f.getProductos().size());
-			return repository.save(f);
+	public ResponseEntity<Factura> newFactura(@RequestBody Factura f) {
+
+		try {
+			Integer cantCompras = repository.getComprasDiaPorUsuario(f.getCliente().getId(), f.getFecha());
+			if(cantCompras == null) {
+				return new ResponseEntity<>(repository.save(f), HttpStatus.CREATED);
+			} else if(cantCompras < 3 && cantCompras+f.getProductos().size() <=3) {
+				return new ResponseEntity<>(repository.save(f), HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return null;
 	}
 
 	@DeleteMapping("/{id}")
 	@CrossOrigin
-	public void dropFactura(@PathVariable Integer id) { 
-		repository.deleteById(id);
+	public ResponseEntity<String> dropFactura(@PathVariable Integer id) { 
+		try {
+			if(repository.existsById(id)) {
+			repository.deleteById(id);
+			return new ResponseEntity<>("Se elimino la factura",HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("La factura no existe o no se pudo eliminar",HttpStatus.NOT_MODIFIED);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>("La factura no existe o no se pudo eliminar",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@PutMapping("/{id}")
 	@CrossOrigin
-	public void updateFactura(@RequestBody Factura f, @PathVariable Integer id) { 
-		repository.deleteById(id);
-		repository.save(f);
+	public ResponseEntity<Factura> updateFactura(@RequestBody Factura f, @PathVariable Integer id) { 
+		if (repository.existsById(id)) {
+			return new ResponseEntity<>(repository.save(f), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 

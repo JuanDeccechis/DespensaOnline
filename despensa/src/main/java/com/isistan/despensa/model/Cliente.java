@@ -27,7 +27,7 @@ public class Cliente {
 
 	@Id
 	@GeneratedValue(
-			strategy= GenerationType.IDENTITY,
+			strategy= GenerationType.AUTO,
 			generator="native"
 			)
 	@GenericGenerator(

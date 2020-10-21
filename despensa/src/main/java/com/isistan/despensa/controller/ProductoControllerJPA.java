@@ -1,7 +1,11 @@
 package com.isistan.despensa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.isistan.despensa.model.Cliente;
@@ -23,27 +27,52 @@ public class ProductoControllerJPA {
 
 	@GetMapping("/") 
 	@CrossOrigin
-	public Iterable<Producto> getProductos() { 
-		return repository.findAll();
+	public ResponseEntity<Iterable<Producto>> getProductos() { 
+		try {
+			List<Producto> productos = repository.findAll();
+			if (productos.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(productos, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@PostMapping("/")
 	@CrossOrigin
-	public Producto newProducto(@RequestBody Producto p) { 
-		return repository.save(p);
+	public ResponseEntity<Producto> newProducto(@RequestBody Producto p) { 
+		p.setId(null);		
+		try {
+			if(p.getNombre() == null || p.getDescripcion() == null || p.getStock() == null || p.getPrecio() == null) {
+				return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+			} else {
+				return new ResponseEntity<>(repository.save(p), HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@DeleteMapping("/{id}")
 	@CrossOrigin
-	public void dropProducto(@PathVariable Integer id) { 
-		repository.deleteById(id);
+	public  ResponseEntity<String> dropProducto(@PathVariable Integer id) { 
+		try {
+			repository.deleteById(id);
+			return new ResponseEntity<>("Se elimino el producto",HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>("El producto no existe o no se pudo eliminar",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@PutMapping("/{id}")
 	@CrossOrigin
-	public void updateProducto(@RequestBody Producto p, @PathVariable Integer id) { 
-		repository.deleteById(id);
-		repository.save(p);
+	public ResponseEntity<Producto> updateProducto(@RequestBody Producto p, @PathVariable Integer id) { 
+		if (repository.existsById(id)) {
+			return new ResponseEntity<>(repository.save(p), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@GetMapping("/BySurname/{surname}")

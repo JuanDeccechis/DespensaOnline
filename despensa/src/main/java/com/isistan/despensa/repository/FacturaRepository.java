@@ -2,6 +2,7 @@ package com.isistan.despensa.repository;
 
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -34,7 +35,7 @@ public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 			+ "	join producto p ON p.id = fp.productos_id\r\n"
 			+ "	GROUP BY fp.factura_id, f.cliente_id", 
 			nativeQuery = true)
-	Iterable<DTOFacturaClienteReporte> getReporteCliente();
+	List<DTOFacturaClienteReporte> getReporteCliente();
 	
 	@Query( value = "select f.fecha, sum(p.precio) as total from cliente c\r\n"
 			+ "join factura f ON f.cliente_id = c.id\r\n"
@@ -42,7 +43,7 @@ public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 			+ "join producto p ON p.id = fp.productos_id\r\n"
 			+ "GROUP by f.fecha", 
 			nativeQuery = true)
-	Iterable<DTOReporteVentasDia> getReporteVentasPorDia();
+	List<DTOReporteVentasDia> getReporteVentasPorDia();
 	
 	@Query( value = "SELECT p.*, COUNT(fp.productos_id) as cantidad FROM factura_productos fp\r\n"
 			+ "join producto p on p.id = fp.productos_id\r\n"
@@ -50,7 +51,7 @@ public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 			+ "ORDER by cantidad DESC\r\n"
 			+ "LIMIT 1", 
 			nativeQuery = true)
-	Iterable<DTOProductoMasVendido> getProductoMasVendido();
+	List<DTOProductoMasVendido> getProductoMasVendido();
 
 
 	
