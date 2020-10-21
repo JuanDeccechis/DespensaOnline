@@ -11,6 +11,6 @@ public interface DTOFacturaClienteReporte {
 
 	 Integer getDni();
 
-	 double getTotal();
+	 Float getTotal();
 
 }
